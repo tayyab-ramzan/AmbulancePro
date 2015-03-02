@@ -11,15 +11,11 @@ public class Transport {
 		private String AdresseDebut;
 		private String  AdresseFin;
 		private boolean Urgent;
-		private enum EtatTranposrt{EnAttente, Commencé, Ternminé,Facturé};
+		private enum EtatTranposrt{EnAttente, CommencÃ©, TernminÃ©,FacturÃ©};
 		private boolean Assise ;
 		private Malade Malade;
 		private EtablissmentSante Etablissment;
 		
-
-		
-
-
 		public Transport(Date dateTransport, Time heureTransport,
 				String adresseDebut, String adresseFin, boolean urgent,
 				boolean assise, Malade malade,
@@ -35,15 +31,9 @@ public class Transport {
 			Etablissment = etablissment;
 		}
 
-
-
-
 		public void CalculCourt(){
 			
 		}
-
-
-		
 		
 		public Malade getMalade() {
 			return Malade;

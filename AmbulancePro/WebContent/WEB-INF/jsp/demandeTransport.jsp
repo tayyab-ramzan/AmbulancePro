@@ -25,14 +25,14 @@
 	<br>
 	<form method="POST" action="demandeTransport.html">
 		<label>Etablissement</label>
-		<select>
-			<option>Etablissement 1</option>
-			<option>Etablissement 2</option>
-			<option>Etablissement 3</option>
+		<select id="etablissement" name="etablissement">
+			<option value="1">Etablissement 1</option>
+			<option value="2">Etablissement 2</option>
+			<option value="3">Etablissement 3</option>
 		</select> <br>
-		<label>Date : </label><input type="text" id="datepicker"> <br>
+		<label>Date : </label><input type="text" id="datepicker" name="date"> <br>
 		<label>Heure :</label>
-		<select>
+		<select id="hour" name="hour">
 			<option>9</option>
 			<option>10</option>
 			<option>11</option>
@@ -43,7 +43,7 @@
 			<option>16</option>
 			<option>17</option>	
 		</select> :
-		<select>
+		<select id="min" name="min">
 			<option>00</option>
 			<option>05</option>
 			<option>10</option>
@@ -59,13 +59,13 @@
 			
 		</select>
 		<br>
-		<label>Adresse Départ</label><input> <br>
-		<label>Adresse D'arrivé</label><input> <br>
+		<label>Adresse Départ:</label><input type="text" id="adresse_deb" name="adresse_deb"> <br>
+		<label>Adresse D'arrivé:</label><input id="adresse_fin" name="adresse_fin"> <br>
 		
-		<label>Nom malade:</label><input> <br>
-		<label>Prénom malade:</label> <input> <br>
-		<label>Adresse malade:</label> <input> <br>
-		<button type="submit">Créer</button>
+		<label>Nom malade:</label><input id="nom_malade" name="nom_malade"> <br>
+		<label>Prénom malade:</label> <input id="prenom_malade" name="prenom_malade"> <br>
+		<label>Adresse malade:</label> <input id="adresse_malade" name="adresse_malade"> <br>
+		<button type="submit" name="submit">Créer</button>
 	</form>
 </body>
 </html>

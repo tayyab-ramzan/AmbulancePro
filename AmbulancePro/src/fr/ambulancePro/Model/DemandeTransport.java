@@ -10,7 +10,7 @@ public class DemandeTransport {
     private Time HeureTransport;
 	private String AdresseDebut;
 	private String  AdresseFin;
-	private enum EtatDemandeTranposrt{EnCour, Traitée, Transférée};
+	private enum EtatDemandeTranposrt{EnCour, TraitÃ©e, TransfÃ©rÃ©e};
 	private Malade Malade;
 	private Vehicule Vehicule;
 	private EtablissmentSante Etablissment;
@@ -31,7 +31,6 @@ public class DemandeTransport {
 		Vehicule = vehicule;
 		Etablissment = etablissment;
 	}
-	
 	
 	public Vehicule getVehicule() {
 		return Vehicule;
