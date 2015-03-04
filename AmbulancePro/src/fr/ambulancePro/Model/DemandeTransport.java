@@ -10,7 +10,7 @@ public class DemandeTransport {
     private Time HeureTransport;
 	private String AdresseDebut;
 	private String  AdresseFin;
-	private enum EtatDemandeTranposrt{EnCour, Traitée, Transférée};
+	private enum EtatDemandeTranposrt{EnCour, Traiter, Transferer};
 	private Malade Malade;
 	private Vehicule Vehicule;
 	private EtablissmentSante Etablissment;

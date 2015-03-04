@@ -42,7 +42,7 @@ public class DemandeTransport {
 		System.out.println(data.get("Nom"));
 		
 		String message = "<br><div align='center'>"
-				+ "<h3>Traitement de DonnÃ©es<br><br>";
+				+ "<h3>Traitement de Données<br><br>";
 		return new ModelAndView("demandeTransport", "message", message);
 	}
 }

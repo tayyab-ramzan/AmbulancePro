@@ -11,7 +11,7 @@ public class Transport {
 		private String AdresseDebut;
 		private String  AdresseFin;
 		private boolean Urgent;
-		private enum EtatTranposrt{EnAttente, Commencé, Ternminé,Facturé};
+		private enum EtatTranposrt{EnAttente, Commencer, Ternminer,Facturer};
 		private boolean Assise ;
 		private Malade Malade;
 		private EtablissmentSante Etablissment;
