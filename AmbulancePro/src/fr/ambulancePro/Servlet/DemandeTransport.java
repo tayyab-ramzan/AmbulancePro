@@ -1,5 +1,6 @@
 package fr.ambulancePro.Servlet;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.ambulancePro.Model.Connexion;
+
 @Controller
 public class DemandeTransport {
 
 	@RequestMapping("demandeTransport")
 	public ModelAndView saisirDemandeTransport(){
-
+		
+		Connexion con = Connexion.getConnexion();
+		
 		String message = "<br><div align='center'>"
 				+ "<h3>Formulaire de demande de Transport<br><br>";
 		return new ModelAndView("demandeTransport", "message", message);
@@ -33,6 +38,7 @@ public class DemandeTransport {
 									@RequestParam("adresse_malade") String adresse_malade){
 		
 		System.out.println(date);
+		Connexion con = Connexion.getConnexion();
 		
 		Map<String, String> data = new HashMap<String, String>();
 		
