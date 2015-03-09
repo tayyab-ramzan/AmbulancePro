@@ -2,7 +2,7 @@ package fr.ambulancePro.Model;
 
 public class Malade {
 	
-	
+	private int idMalade;
 	private String NomMalade;
 	private String PrenomMalade;
 	private String AdresseMalade;
@@ -23,6 +23,16 @@ public class Malade {
 
 	public void setNomMalade(String nomMalade) {
 		NomMalade = nomMalade;
+	}
+
+
+	public int getIdMalade() {
+		return idMalade;
+	}
+
+
+	public void setIdMalade(int idMalade) {
+		this.idMalade = idMalade;
 	}
 
 

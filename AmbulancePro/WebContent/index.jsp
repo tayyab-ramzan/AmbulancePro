@@ -7,6 +7,7 @@
 <title>AmbulancePro</title>
 </head>
 <body>
-	<a href="demandeTransport.html">Saisir une demande de Transport</a>
+	<a href="etablissement.html">Etablissement</a><br>
+	<a href="demandeTransport.html">Demande de Transport</a>
 </body>
 </html>

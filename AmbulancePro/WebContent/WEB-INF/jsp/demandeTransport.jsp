@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,51 +22,61 @@
 
 </head>
 <body>
-	${message}
-	<br>
-	<form method="POST" action="demandeTransport.html">
-		<label>Etablissement</label>
-		<select id="etablissement" name="etablissement">
-			<option value="1">Etablissement 1</option>
-			<option value="2">Etablissement 2</option>
-			<option value="3">Etablissement 3</option>
-		</select> <br>
-		<label>Date : </label><input type="text" id="datepicker" name="date"> <br>
-		<label>Heure :</label>
-		<select id="hour" name="hour">
-			<option>9</option>
-			<option>10</option>
-			<option>11</option>
-			<option>12</option>
-			<option>13</option>
-			<option>14</option>
-			<option>15</option>
-			<option>16</option>
-			<option>17</option>	
-		</select> :
-		<select id="min" name="min">
-			<option>00</option>
-			<option>05</option>
-			<option>10</option>
-			<option>15</option>
-			<option>20</option>
-			<option>25</option>
-			<option>30</option>
-			<option>35</option>
-			<option>40</option>
-			<option>45</option>
-			<option>50</option>
-			<option>55</option>
+	<div align='center'>
+		<h3>Formulaire Création Demande de Transport</h3><br><br>
+		<form method="POST" action="demandeTransport.html">
+			<label>Etablissement</label>
+			<select id="etablissement" name="etablissement">
+				<option value="">Veuillez choisir un établissement</option>
+				<c:forEach var="etablissement" items="${dataErrors.data.etablissements}">
+					<c:choose>
+						<c:when test="${dataErrors.data.etablissement == etablissement.getIdEtablissement()}">
+							<option value="${etablissement.getIdEtablissement()}" selected>${etablissement.getNomEtablissement()}</option>
+						</c:when>
+						<c:otherwise>
+							<option value="${etablissement.getIdEtablissement()}">${etablissement.getNomEtablissement()}</option>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</select> ${dataErrors.errors.etablissement} <br>
+			<label>Date : </label><input type="text" id="datepicker" name="date" value="${dataErrors.data.date }">${dataErrors.errors.date} <br>
+			<label>Heure :</label>
+			<select id="hour" name="hour">
+				<option value="">Heure</option>
+				<c:forEach var="i" begin="9" end="17">
+					<c:choose>
+						<c:when test="${dataErrors.data.hour == i}">
+							<option selected>${i}</option>
+						</c:when>
+						<c:otherwise>
+							<option>${i}</option>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</select> :
+			<select id="min" name="min">
+				<option value="">Minute</option>
+				<c:forEach var="i" begin="0" end="59">
+					<c:choose>
+						<c:when test="${dataErrors.data.min == i}">
+							<option selected>${i}</option>
+						</c:when>
+						<c:otherwise>
+							<option>${i}</option>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</select>${dataErrors.errors.time}
+			<br>
+			<label>Adresse Départ:</label><input type="text" id="adresse_deb" name="adresse_deb" value="${dataErrors.data.adresse_deb }">${dataErrors.errors.adresse_deb} <br>
+			<label>Adresse D'arrivé:</label><input id="adresse_fin" name="adresse_fin" value="${dataErrors.data.adresse_fin }">${dataErrors.errors.adresse_fin} <br>
 			
-		</select>
-		<br>
-		<label>Adresse Départ:</label><input type="text" id="adresse_deb" name="adresse_deb"> <br>
-		<label>Adresse D'arrivé:</label><input id="adresse_fin" name="adresse_fin"> <br>
-		
-		<label>Nom malade:</label><input id="nom_malade" name="nom_malade"> <br>
-		<label>Prénom malade:</label> <input id="prenom_malade" name="prenom_malade"> <br>
-		<label>Adresse malade:</label> <input id="adresse_malade" name="adresse_malade"> <br>
-		<button type="submit" name="submit">Créer</button>
-	</form>
+			<label>Nom malade:</label><input id="nom_malade" name="nom_malade" value="${dataErrors.data.nom_malade }">${dataErrors.errors.nom_malade} <br>
+			<label>Prénom malade:</label> <input id="prenom_malade" name="prenom_malade" value="${dataErrors.data.prenom_malade }">${dataErrors.errors.prenom_malade} <br>
+			<label>Adresse malade:</label> <input id="adresse_malade" name="adresse_malade" value="${dataErrors.data.adresse_malade }">${dataErrors.errors.adresse_malade} <br>
+			<button type="submit" name="submit">Créer</button>
+		</form>
+	</div>
+	
 </body>
 </html>

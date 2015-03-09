@@ -14,12 +14,12 @@ public class Transport {
 		private enum EtatTranposrt{EnAttente, Commencer, Ternminer,Facturer};
 		private boolean Assise ;
 		private Malade Malade;
-		private EtablissmentSante Etablissment;
+		private EtablissementSante Etablissment;
 		
 		public Transport(Date dateTransport, Time heureTransport,
 				String adresseDebut, String adresseFin, boolean urgent,
 				boolean assise, Malade malade,
-				EtablissmentSante etablissment) {
+				EtablissementSante etablissment) {
 			super();
 			DateTransport = dateTransport;
 			HeureTransport = heureTransport;
@@ -43,11 +43,11 @@ public class Transport {
 			Malade = malade;
 		}
 		
-		public EtablissmentSante getEtablissment() {
+		public EtablissementSante getEtablissment() {
 			return Etablissment;
 		}
 		
-		public void setEtablissment(EtablissmentSante etablissment) {
+		public void setEtablissment(EtablissementSante etablissment) {
 			Etablissment = etablissment;
 		}
 		

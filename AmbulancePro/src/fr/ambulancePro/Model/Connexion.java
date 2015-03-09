@@ -12,7 +12,10 @@ public class Connexion {
 
 	private static Connexion connexion;
 	
-	/* La liste qui contiendra tous les résultats de nos essais */
+	private Statement statement = null;
+	private Connection con = null;
+	
+	/* La liste qui contiendra tous les rï¿½sultats de nos essais */
     private List<String> messages = new ArrayList<String>();
     
 	protected Connexion(){
@@ -20,29 +23,26 @@ public class Connexion {
         try {
             messages.add( "Chargement du driver..." );
             Class.forName( "com.mysql.jdbc.Driver" );
-            messages.add( "Driver chargé !" );
+            messages.add( "Driver chargÃ© !" );
         } catch ( ClassNotFoundException e ) {
-            messages.add( "Erreur lors du chargement : le driver n'a pas été trouvé dans le classpath ! <br/>"
+            messages.add( "Erreur lors du chargement : le driver n'a pas Ã©tÃ© trouvÃ© dans le classpath ! <br/>"
                     + e.getMessage() );
         }
         
-        /* Connexion à la base de données */
-        String url = "jdbc:mysql://localhost:3306/ambulance_pro";
+        /* Connexion ï¿½ la base de donnï¿½es */
+        String url = "jdbc:mysql://localhost:8889/ambulance_pro";
         String utilisateur = "root";
-        String motDePasse = "";
-        Connection connexion = null;
-        Statement statement = null;
-        ResultSet resultat = null;
+        String motDePasse = "root";
         
-        messages.add( "Connexion à la base de données..." );
+        messages.add( "Connexion Ã  la base de donnÃ©es..." );
         try {
-			connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
-			messages.add( "Connexion réussie !" );
+			con = DriverManager.getConnection( url, utilisateur, motDePasse );
+			messages.add( "Connexion rÃ©ussie !" );
 		} catch (SQLException e) {
 			 messages.add( "Erreur lors de la connexion : <br/>"
 	                    + e.getMessage() );
 		}        
-        System.out.println(messages);
+        //System.out.println(messages);
 	}
 	
 	public static Connexion getConnexion(){
@@ -52,8 +52,13 @@ public class Connexion {
 	}
 	
 	public Statement getStatement(){
-		return null;
-		
+		try {
+			statement = con.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return statement;
 	}
 	
 }

@@ -1,26 +1,41 @@
 package fr.ambulancePro.Model;
 
-public class EtablissmentSante {
+public class EtablissementSante {
 	
-	private String NomEtablissment;
+	private int idEtablissement;
+	
+	private String NomEtablissement;
 	private String AdresseEtablissment;
 	private String MailEtablissment;
 	private String TelEtablissment;	
 	
-	public EtablissmentSante(String nomEtablissment,
+	public EtablissementSante() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public EtablissementSante(String nomEtablissment,
 			String adresseEtablissment, String mailEtablissment,
 			String telEtablissment) {
 		super();
-		NomEtablissment = nomEtablissment;
+		NomEtablissement = nomEtablissment;
 		AdresseEtablissment = adresseEtablissment;
 		MailEtablissment = mailEtablissment;
 		TelEtablissment = telEtablissment;
 	}
-	public String getNomEtablissment() {
-		return NomEtablissment;
+	
+	public int getIdEtablissement() {
+		return idEtablissement;
+	}
+
+	public void setIdEtablissement(int idEtablissement) {
+		this.idEtablissement = idEtablissement;
+	}
+	
+	public String getNomEtablissement() {
+		return NomEtablissement;
 	}
 	public void setNomEtablissment(String nomEtablissment) {
-		NomEtablissment = nomEtablissment;
+		NomEtablissement = nomEtablissment;
 	}
 	public String getAdresseEtablissment() {
 		return AdresseEtablissment;

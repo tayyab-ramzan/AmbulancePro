@@ -1,48 +1,44 @@
 package fr.ambulancePro.Model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 
 public class DemandeTransport {
 	
-	
-    private Date  DateTransport;
+	private int idDemandeTransport;
+	private Date  DateTransport;
     private Time HeureTransport;
 	private String AdresseDebut;
 	private String  AdresseFin;
 	private enum EtatDemandeTranposrt{EnCour, Traiter, Transferer};
 	private Malade Malade;
-	private Vehicule Vehicule;
-	private EtablissmentSante Etablissment;
-	
-
-	
+	private int idEtablissment;
 	
 	public DemandeTransport(Date dateTransport, Time heureTransport,
 			String adresseDebut, String adresseFin,
 			Malade malade,
-			Vehicule vehicule, EtablissmentSante etablissment) {
-		super();
+			int idEtablissment) {
 		DateTransport = dateTransport;
 		HeureTransport = heureTransport;
 		AdresseDebut = adresseDebut;
 		AdresseFin = adresseFin;
 		Malade = malade;
-		Vehicule = vehicule;
-		Etablissment = etablissment;
+		this.idDemandeTransport = idEtablissment;
 	}
 	
-	public Vehicule getVehicule() {
-		return Vehicule;
+	public int getIdDemandeTransport() {
+		return idDemandeTransport;
 	}
-	public void setVehicule(Vehicule vehicule) {
-		Vehicule = vehicule;
+
+	public void setIdDemandeTransport(int idDemandeTransport) {
+		this.idDemandeTransport = idDemandeTransport;
 	}
-	public EtablissmentSante getEtablissment() {
-		return Etablissment;
+	
+	public int getEtablissment() {
+		return idEtablissment;
 	}
-	public void setEtablissment(EtablissmentSante etablissment) {
-		Etablissment = etablissment;
+	public void setEtablissment(int etablissment) {
+		this.idDemandeTransport = etablissment;
 	}
 	public Malade getMalade() {
 		return Malade;
