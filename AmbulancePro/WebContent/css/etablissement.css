@@ -1,0 +1,39 @@
+@CHARSET "ISO-8859-1";
+ .form1 {
+ 	border: thin solid black;
+ 	padding-bottom: 20px;
+ 	padding-top: 20px;
+ 	width: 650px;
+}
+
+ .form1 label{
+ 	display: block;
+ 	float:left;
+ 	padding-left:10px;
+ 	width: 200px;
+ 	text-align: left;
+}
+ 
+ .form1 input {
+    display:block;
+    padding: 3px;
+    marging:0;
+    width:260px; 	
+}
+ 
+ .form1 button {
+	overflow:hidden;
+}
+
+.form1 select{
+	display:block;
+    padding: 3px;
+    marging:0;
+    width:260px;
+}
+
+#hour, #min{
+	display:inline-block;
+	width:100px;
+	margin-bottom:20px;
+}

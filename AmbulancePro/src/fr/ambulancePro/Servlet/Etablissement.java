@@ -32,8 +32,6 @@ public class Etablissement {
 	public ModelAndView printForm(){
 		
 		this.dao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getEtablissementDao();
-		
-		
 		return new ModelAndView("etablissement");
 	}
 	

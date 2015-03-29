@@ -4,10 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="css/index.css"/>
 <title>AmbulancePro</title>
 </head>
 <body>
 	<a href="etablissement.html">Etablissement</a><br>
-	<a href="demandeTransport.html">Demande de Transport</a>
+	<a href="demandeTransport.html">Demande de Transport</a><br>
+	<a href="listeDemandeTransport.html">Liste Demande de Transport</a>
 </body>
 </html>

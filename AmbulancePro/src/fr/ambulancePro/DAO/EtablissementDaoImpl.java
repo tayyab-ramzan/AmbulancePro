@@ -77,8 +77,8 @@ public class EtablissementDaoImpl implements EtablissementDao {
 	
 	/*
 	 * Simple méthode utilitaire permettant de faire la correspondance (le
-	 * mapping) entre une ligne issue de la table des utilisateurs (un
-	 * ResultSet) et un bean Utilisateur.
+	 * mapping) entre une ligne issue de la table etablissement (un
+	 * ResultSet) et un bean etablissement.
 	 */
 	private static EtablissementSante map( ResultSet resultSet ) throws SQLException {
 		EtablissementSante etablissement = new EtablissementSante();

@@ -14,6 +14,10 @@ public class DemandeTransport {
 	private Malade Malade;
 	private int idEtablissment;
 	
+	public DemandeTransport() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public DemandeTransport(Date dateTransport, Time heureTransport,
 			String adresseDebut, String adresseFin,
 			Malade malade,
@@ -70,7 +74,5 @@ public class DemandeTransport {
 	public void setAdresseFin(String adresseFin) {
 		AdresseFin = adresseFin;
 	};
-
-	
 
 }

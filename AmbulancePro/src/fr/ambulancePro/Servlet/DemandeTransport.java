@@ -80,8 +80,6 @@ public class DemandeTransport {
 		data.put("prenom_malade",prenom_malade);
 		data.put("adresse_malade", adresse_malade);
 		
-		System.out.println(etablissement);
-		
 		errors.clear();
 		
 		if (etablissement == "") {
@@ -138,9 +136,20 @@ public class DemandeTransport {
 			
 			
 			return new ModelAndView("listeDemandeTransport");
-		}
-		
-		
-		
+		}		
 	}
+	
+	@RequestMapping("listeDemandeTransport")
+	public ModelAndView listeDemandeTransport(){
+		errors.clear();
+		data.clear();
+		this.dao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getEtablissementDao();
+		this.demandeDao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getDemandeTransportDao();
+		ArrayList<fr.ambulancePro.Model.DemandeTransport> demandes = new ArrayList<fr.ambulancePro.Model.DemandeTransport>();
+		demandes = this.demandeDao.listeDemandeTransport();
+		data.put("demandes", demandes);
+		dataErrorMap.put("data",data);
+		return new ModelAndView("listeDemandeTransport", "dataErrors", dataErrorMap);
+	}
+	
 }
