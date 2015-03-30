@@ -20,17 +20,6 @@ ${dataErrors.data.demandes}
 			<td>${demande.getDateTransport() }
 		</c:forEach>
 			</tr>
-		<tr>
-			<td>Nesrine</td>
-			<td>Nes</td>
-			<td>Nes</td>
-		</tr>
-		<tr>
-			<td>sellami</td>
-			<td>sel</td>
-			<td>Nes</td>
-		</tr>
-		
 	</table>
 </body>
 </html>
