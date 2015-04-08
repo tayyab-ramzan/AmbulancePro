@@ -42,7 +42,7 @@ public class DemandeTransport {
 		return idEtablissment;
 	}
 	public void setEtablissment(int etablissment) {
-		this.idDemandeTransport = etablissment;
+		this.idEtablissment = etablissment;
 	}
 	public Malade getMalade() {
 		return Malade;

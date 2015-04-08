@@ -114,6 +114,7 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	        resultSet = preparedStatement.executeQuery();
 	        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
 	        while (resultSet.next()) {
+	        	
 	        	demandes.add(map( resultSet ));
 			}
 	    } catch ( SQLException e ) {
@@ -121,6 +122,7 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	    } finally {
 	        fermeturesSilencieuses( resultSet, preparedStatement, connexion );
 	    }
+	    //System.out.println(demandes.get(0).getIdDemandeTransport());
 	    return demandes;
 	
 	}

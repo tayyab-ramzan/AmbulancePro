@@ -69,7 +69,7 @@ public class DemandeTransport {
 									@RequestParam("nom_malade") String nom_malade,
 									@RequestParam("prenom_malade") String prenom_malade,
 									@RequestParam("adresse_malade") String adresse_malade){
-
+		System.out.println(etablissement);
 		data.put("etablissement", etablissement);
 		data.put("date", date);
 		data.put("hour", heure);
@@ -135,7 +135,7 @@ public class DemandeTransport {
 			
 			
 			
-			return new ModelAndView("listeDemandeTransport");
+			return listeDemandeTransport();
 		}		
 	}
 	
