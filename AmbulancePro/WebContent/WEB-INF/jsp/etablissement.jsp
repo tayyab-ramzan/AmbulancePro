@@ -13,7 +13,7 @@
 	<div align='center'>
 		<h3>Formulaire Création Établissement</h3><br><br>
 		
-		<form class= "form1" action="etablissement.html" method="POST">
+	<form class= "form1" action="etablissement.html" method="POST">
 		<label>Nom Établissement:</label><input type="text" id="nom_etablissement" name="nom_etablissement" value="${dataErrors.data.nom}" placeholder="indiquer le nom de l'établissement">${dataErrors.errors.nom}  <br>
 		<label>Adresse:</label><input id="adresse" name="adresse" value="${dataErrors.data.adresse}" placeholder="indiquer l'adresse de l'établissement">${dataErrors.errors.adresse} <br>
 		

@@ -152,4 +152,10 @@ public class DemandeTransport {
 		return new ModelAndView("listeDemandeTransport", "dataErrors", dataErrorMap);
 	}
 	
+	@RequestMapping("traiterDemande")
+	public ModelAndView traiterDemande (@RequestParam("id") String id){
+		System.out.println(id);
+		return new ModelAndView("traiterDemande");
+	}
+	
 }

@@ -9,4 +9,5 @@
 
 .listeDemande tr:HOVER td{
 	background: gray;
+	cursor: pointer;
 }

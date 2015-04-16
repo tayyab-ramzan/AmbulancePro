@@ -15,7 +15,7 @@
 		<th>Date et Heure</th>
 			<c:forEach var="demande" items="${dataErrors.data.demandes}">
 				<a href="#">
-					<tr>
+					<tr onclick="document.location = 'traiterDemande.html?id=${demande.getIdDemandeTransport()}';">
 						<td>${demande.getIdDemandeTransport() }</td>
 						<td>${demande.getEtablissment() }</td>
 						<td>${demande.getDateTransport() }
