@@ -12,7 +12,7 @@
 		<h3>Formulaire Création Vehicule</h3><br><br>
 		
 	<form class= "form1" action="vehicule.html" method="POST">
-		<label>Numéro d'Immatricule:</label><input type="text" id="nom_etablissement" name="nom_etablissement" value="${dataErrors.data.nom}" placeholder="indiquer le numéro d'imatricule du véhicule">${dataErrors.errors.nom}  <br>
+		<label>Numéro d'Immatricule:</label><input type="text" id="numero_immatricule" name="numero_immatricule" value="${dataErrors.data.nom}" placeholder="indiquer le numéro d'imatricule du véhicule">${dataErrors.errors.nom}  <br>
 		<button type="submit" name="submit">Créer</button>
 	</form>
 	</div>
