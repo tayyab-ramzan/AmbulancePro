@@ -17,7 +17,7 @@
 				<a href="#">
 					<tr onclick="document.location = 'traiterDemande.html?id=${demande.getIdDemandeTransport()}';">
 						<td>${demande.getIdDemandeTransport() }</td>
-						<td>${demande.getEtablissment() }</td>
+						<td>${demande.getEtablissement() }</td>
 						<td>${demande.getDateTransport() }
 					</tr>
 				</a>

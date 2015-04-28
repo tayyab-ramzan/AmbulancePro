@@ -2,22 +2,17 @@ package fr.ambulancePro.Model;
 
 public class Vehicule {
 	
-	
-	private String NumeroImatriculation ;
+	private String _numeroImatriculation ;
 
 	public Vehicule(String numeroImatriculation) {
-		super();
-		NumeroImatriculation = numeroImatriculation;
+		_numeroImatriculation = numeroImatriculation;
 	}
 
 	public String getNumeroImatriculation() {
-		return NumeroImatriculation;
+		return _numeroImatriculation;
 	}
 
 	public void setNumeroImatriculation(String numeroImatriculation) {
-		NumeroImatriculation = numeroImatriculation;
+		_numeroImatriculation = numeroImatriculation;
 	}
-	
-	
-
 }

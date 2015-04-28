@@ -5,112 +5,94 @@ import java.sql.Time;
 
 public class Transport {
 
-	
-	    private Date  DateTransport;
-	    private Time HeureTransport;
-		private String AdresseDebut;
-		private String  AdresseFin;
-		private boolean Urgent;
-		private enum EtatTranposrt{EnAttente, Commencer, Ternminer,Facturer};
-		private boolean Assise ;
-		private Malade Malade;
-		private EtablissementSante Etablissment;
+	private Date _dateTransport;
+	private Time _heureTransport;
+	private String _adresseDebut;
+	private String  _adresseFin;
+	private boolean _urgent;
+	private boolean _assise ;
+	private Malade _malade;
+	private EtablissementSante _etablissment;
 		
-		public Transport(Date dateTransport, Time heureTransport,
-				String adresseDebut, String adresseFin, boolean urgent,
-				boolean assise, Malade malade,
-				EtablissementSante etablissment) {
-			super();
-			DateTransport = dateTransport;
-			HeureTransport = heureTransport;
-			AdresseDebut = adresseDebut;
-			AdresseFin = adresseFin;
-			Urgent = urgent;
-			Assise = assise;
-			Malade = malade;
-			Etablissment = etablissment;
-		}
+	private enum EtatTranposrt{EnAttente, Commencer, Ternminer,Facturer};
+	private EtatTranposrt _etatTransport;
+		
+	public Transport(Date dateTransport,Time heureTransport,String adresseDebut, String adresseFin, boolean urgent,boolean assise, Malade malade,EtablissementSante etablissment) {
+		this._dateTransport = dateTransport;
+		this._heureTransport = heureTransport;
+		this._adresseDebut = adresseDebut;
+		this._adresseFin = adresseFin;
+		this._urgent = urgent;
+		this._assise = assise;
+		this._malade = malade;
+		this._etablissment = etablissment;
+	}
 
-		public void CalculCourt(){
+	public void CalculCourt(){
 			
-		}
+	}
 		
-		public Malade getMalade() {
-			return Malade;
-		}
+	public Malade getMalade() {
+		return this._malade;
+	}
 		
-		public void setMalade(Malade malade) {
-			Malade = malade;
-		}
+	public void setMalade(Malade malade) {
+		this._malade = malade;
+	}
 		
-		public EtablissementSante getEtablissment() {
-			return Etablissment;
-		}
+	public EtablissementSante getEtablissment() {
+		return this._etablissment;
+	}
 		
-		public void setEtablissment(EtablissementSante etablissment) {
-			Etablissment = etablissment;
-		}
+	public void setEtablissment(EtablissementSante etablissment) {
+		this._etablissment = etablissment;
+	}
 		
-		
-		public Date getDateTransport() {
-			return DateTransport;
-		}
+	public Date getDateTransport() {
+		return this._dateTransport;
+	}
 
+	public void setDateTransport(Date dateTransport) {
+		this._dateTransport = dateTransport;
+	}
 
-		public void setDateTransport(Date dateTransport) {
-			DateTransport = dateTransport;
-		}
+	public Time getHeureTransport() {
+		return this._heureTransport;
+	}
 
+	public void setHeureTransport(Time heureTransport) {
+		this._heureTransport = heureTransport;
+	}
 
-		public Time getHeureTransport() {
-			return HeureTransport;
-		}
+	public String getAdresseDebut() {
+		return this._adresseDebut;
+	}
 
+	public void setAdresseDebut(String adresseDebut) {
+		this._adresseDebut = adresseDebut;
+	}
 
-		public void setHeureTransport(Time heureTransport) {
-			HeureTransport = heureTransport;
-		}
+	public String getAdresseFin() {
+		return this._adresseFin;
+	}
 
+	public void setAdresseFin(String adresseFin) {
+		this._adresseFin = adresseFin;
+	}
 
-		public String getAdresseDebut() {
-			return AdresseDebut;
-		}
+	public boolean isUrgent() {
+		return this._urgent;
+	}
 
+	public void setUrgent(boolean urgent) {
+		this._urgent = urgent;
+	}
 
-		public void setAdresseDebut(String adresseDebut) {
-			AdresseDebut = adresseDebut;
-		}
+	public boolean isAssise() {
+		return this._assise;
+	}
 
-
-		public String getAdresseFin() {
-			return AdresseFin;
-		}
-
-
-		public void setAdresseFin(String adresseFin) {
-			AdresseFin = adresseFin;
-		}
-
-
-		public boolean isUrgent() {
-			return Urgent;
-		}
-
-
-		public void setUrgent(boolean urgent) {
-			Urgent = urgent;
-		}
-
-
-		public boolean isAssise() {
-			return Assise;
-		}
-
-
-		public void setAssise(boolean assise) {
-			Assise = assise;
-		}
-
-		
-		
+	public void setAssise(boolean assise) {
+		this._assise = assise;
+	}
 }

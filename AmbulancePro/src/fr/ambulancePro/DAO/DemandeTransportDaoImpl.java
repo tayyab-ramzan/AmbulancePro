@@ -17,7 +17,7 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	
 	private DAOFactory daoFactory;
 	
-	private static final String SQL_SELECT_PAR_ID = "SELECT * FROM etablissement WHERE id = ?";
+	private static final String SQL_SELECT_PAR_ID = "SELECT * FROM demande_transport WHERE id_demande_transport = ?";
 	private static final String SQL_SELECT_ALL = "SELECT * FROM demande_transport";
 	private static final String SQL_INSERT = "INSERT INTO demande_transport (date_demande_transport, heure_demande_transport, adresse_debut, adresse_fin,id_etablissement,id_malade) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String SQL_INSERT_MALADE = "INSERT INTO malade (nom_malade, prenom_malade, adresse_malade) VALUES(?, ?, ?)";
@@ -55,7 +55,7 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	        }
 	        
 	        //Requete pour la création d'une demande de transport
-	        preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, demandeTransport.getDateTransport(), demandeTransport.getHeureTransport(), demandeTransport.getAdresseDebut(), demandeTransport.getAdresseFin(),demandeTransport.getEtablissment(),malade.getIdMalade());;
+	        preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, demandeTransport.getDateTransport(), demandeTransport.getHeureTransport(), demandeTransport.getAdresseDebut(), demandeTransport.getAdresseFin(),demandeTransport.getEtablissement(),malade.getIdMalade());;
 	        statut = preparedStatement.executeUpdate();
 	        if ( statut == 0 ) {
 	            throw new DAOException( "Échec de la création d'une demande de transport, aucune ligne ajoutée dans la table." );
@@ -80,7 +80,26 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	@Override
 	public DemandeTransport trouver(int id) throws DAOException {
 		// TODO Auto-generated method stub
-		return null;
+		Connection connexion = null;
+	    PreparedStatement preparedStatement = null;
+	    ResultSet resultSet = null;
+	    DemandeTransport demandeTransport = null;
+	    
+	    try {
+	        /* Récupération d'une connexion depuis la Factory */
+	        connexion = daoFactory.getConnection();
+	        preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_PAR_ID, false, id );
+	        resultSet = preparedStatement.executeQuery();
+	        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
+	        if ( resultSet.next() ) {
+	        	demandeTransport = map( resultSet );
+	        }
+	    } catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+	    }
+	    return demandeTransport;
 	}
 	
 	/*
@@ -95,7 +114,7 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 		demande.setHeureTransport( resultSet.getTime( "heure_demande_transport" ) );
 		demande.setAdresseDebut( resultSet.getString( "adresse_debut" ) );
 		demande.setAdresseFin( resultSet.getString( "adresse_fin" ) );
-		demande.setEtablissment( resultSet.getInt( "id_etablissement" ) );
+		demande.setEtablissement( resultSet.getInt( "id_etablissement" ) );
 		return demande;
 	}
 	

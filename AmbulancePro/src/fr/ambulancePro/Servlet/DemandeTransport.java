@@ -154,7 +154,17 @@ public class DemandeTransport {
 	
 	@RequestMapping("traiterDemande")
 	public ModelAndView traiterDemande (@RequestParam("id") String id){
-		System.out.println(id);
+		
+		this.demandeDao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getDemandeTransportDao();
+		fr.ambulancePro.Model.DemandeTransport demande = demandeDao.trouver(Integer.parseInt(id));
+		errors.clear();
+		data.clear();
+		data.put("demande", demande);
+		return new ModelAndView("traiterDemande","data",data);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "traiterDemande")
+	public ModelAndView validerDemande (){
 		return new ModelAndView("traiterDemande");
 	}
 	

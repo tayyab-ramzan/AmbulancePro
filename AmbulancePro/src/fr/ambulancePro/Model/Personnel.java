@@ -2,92 +2,80 @@ package fr.ambulancePro.Model;
 
 public class Personnel implements Comparable<Personnel>{
 
-	  private String NomPersonnel;
-	    private String PrenomPersonnel;
-		private String LoginPersonnel;
-		private String  MdpPersonnel;
-		private StrategiePersonnel Strategie;
+	  private String _nomPersonnel;
+	  private String _prenomPersonnel;
+	  private String _loginPersonnel;
+	  private String  _mdpPersonnel;
+	  private StrategiePersonnel _strategie;
 		
+	  public Personnel(String loginPersonnel, String mdpPersonnel) {
+		  this._loginPersonnel = loginPersonnel;
+		  this._mdpPersonnel = mdpPersonnel;
+	  }
+
+	  public Personnel(String nomPersonnel, String prenomPersonnel,String loginPersonnel, String mdpPersonnel , StrategiePersonnel start) {
+		  this._nomPersonnel = nomPersonnel;
+		  this._prenomPersonnel = prenomPersonnel;
+		  this._loginPersonnel = loginPersonnel;
+		  this._mdpPersonnel = mdpPersonnel;
+		  this._strategie = start;
+	  }
 		
+	  public void changerStrategie(StrategiePersonnel s){	
+		  this._strategie = s;
+	  }
 		
+	  public String getNomPersonnel() {
+		  return this._nomPersonnel;
+	  }
+	  
+	  public void setNomPersonnel(String nomPersonnel) {
+		  this._nomPersonnel = nomPersonnel;
+	  }
+	  
+	  public String getPrenomPersonnel() {
+		  return this._prenomPersonnel;
+	  }
+	  
+	  public void setPrenomPersonnel(String prenomPersonnel) {
+			this._prenomPersonnel = prenomPersonnel;
+	  }
+	  
+	  public String getLoginPersonnel() {
+		  return this._loginPersonnel;
+	  }
 		
-		public Personnel(String loginPersonnel, String mdpPersonnel) {
-			super();
-			LoginPersonnel = loginPersonnel;
-			MdpPersonnel = mdpPersonnel;
-		}
+	  public void setLoginPersonnel(String loginPersonnel) {
+		  this._loginPersonnel = loginPersonnel;
+	  }
+	  
+	  public String getMdpPersonnel() {
+		  return this._mdpPersonnel;
+	  }
+	  
+	  public void setMdpPersonnel(String mdpPersonnel) {
+		  this._mdpPersonnel = mdpPersonnel;
+	  }
+		
+	  public StrategiePersonnel getStrategie() {
+		  return this._strategie;
+	  }
 
-
-
-		public Personnel(String nomPersonnel, String prenomPersonnel,
-				String loginPersonnel, String mdpPersonnel , StrategiePersonnel start) {
-			super();
-			NomPersonnel = nomPersonnel;
-			PrenomPersonnel = prenomPersonnel;
-			LoginPersonnel = loginPersonnel;
-			MdpPersonnel = mdpPersonnel;
-			Strategie = start;
-		}
-
+	  public void setStrategie(StrategiePersonnel strategie) {
+		  this._strategie = strategie;
+	  }
+	  
+	  @Override
+	  public int compareTo(Personnel p) {
+			
+		  if(p.getLoginPersonnel().compareTo(this._loginPersonnel) == 0){
 	
-		
-		public void changerStrategie(StrategiePersonnel s){
-			
-		}
-		
-		
-		
-		public String getNomPersonnel() {
-			return NomPersonnel;
-		}
-		public void setNomPersonnel(String nomPersonnel) {
-			NomPersonnel = nomPersonnel;
-		}
-		public String getPrenomPersonnel() {
-			return PrenomPersonnel;
-		}
-		public void setPrenomPersonnel(String prenomPersonnel) {
-			PrenomPersonnel = prenomPersonnel;
-		}
-		public String getLoginPersonnel() {
-			return LoginPersonnel;
-		}
-		public void setLoginPersonnel(String loginPersonnel) {
-			LoginPersonnel = loginPersonnel;
-		}
-		public String getMdpPersonnel() {
-			return MdpPersonnel;
-		}
-		public void setMdpPersonnel(String mdpPersonnel) {
-			MdpPersonnel = mdpPersonnel;
-		}
-		
-		public StrategiePersonnel getStrategie() {
-			return Strategie;
-		}
-
-		public void setStrategie(StrategiePersonnel strategie) {
-			Strategie = strategie;
-		}
-
-
-
-		@Override
-		public int compareTo(Personnel o) {
-			// TODO Auto-generated method stub
-			
-			if(o.getLoginPersonnel().compareTo(this.LoginPersonnel) == 0){
-				
-				if(o.getMdpPersonnel().compareTo(this.MdpPersonnel) == 0){
-					return 0;
-				}
-				return -1;
+			  if(p.getMdpPersonnel().compareTo(this._mdpPersonnel) == 0){
+				  return 0;
+			  }
+			  	return -1;
 			}
 			
 			return -1;
-		}
-
-		
-		
-		
+	  }
 }

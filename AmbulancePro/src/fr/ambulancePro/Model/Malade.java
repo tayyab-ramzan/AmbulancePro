@@ -2,57 +2,55 @@ package fr.ambulancePro.Model;
 
 public class Malade {
 	
-	private int idMalade;
-	private String NomMalade;
-	private String PrenomMalade;
-	private String AdresseMalade;
+	private int _idMalade;
+	private String _nomMalade;
+	private String _prenomMalade;
+	private String _adresseMalade;
 	
 	
 	public Malade(String nomMalade, String prenomMalade, String adresseMalade) {
-		super();
-		NomMalade = nomMalade;
-		PrenomMalade = prenomMalade;
-		AdresseMalade = adresseMalade;
+		_nomMalade = nomMalade;
+		_prenomMalade = prenomMalade;
+		_adresseMalade = adresseMalade;
 	}
 
 
 	public String getNomMalade() {
-		return NomMalade;
+		return _nomMalade;
 	}
 
 
 	public void setNomMalade(String nomMalade) {
-		NomMalade = nomMalade;
+		_nomMalade = nomMalade;
 	}
 
 
 	public int getIdMalade() {
-		return idMalade;
+		return _idMalade;
 	}
 
 
 	public void setIdMalade(int idMalade) {
-		this.idMalade = idMalade;
+		this._idMalade = idMalade;
 	}
 
 
 	public String getPrenomMalade() {
-		return PrenomMalade;
+		return _prenomMalade;
 	}
 
 
 	public void setPrenomMalade(String prenomMalade) {
-		PrenomMalade = prenomMalade;
+		_prenomMalade = prenomMalade;
 	}
 
 
 	public String getAdresseMalade() {
-		return AdresseMalade;
+		return _adresseMalade;
 	}
 
 
 	public void setAdresseMalade(String adresseMalade) {
-		AdresseMalade = adresseMalade;
+		_adresseMalade = adresseMalade;
 	}
-
 }

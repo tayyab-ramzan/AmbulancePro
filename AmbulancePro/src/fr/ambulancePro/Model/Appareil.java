@@ -2,21 +2,17 @@ package fr.ambulancePro.Model;
 
 public class Appareil {
 	
-	private String NomAppareil ;
+	private String _nomAppareil ;
 
 	public Appareil(String nomAppareil) {
-		super();
-		NomAppareil = nomAppareil;
+		_nomAppareil = nomAppareil;
 	}
 
 	public String getNomAppareil() {
-		return NomAppareil;
+		return _nomAppareil;
 	}
 
 	public void setNomAppareil(String nomAppareil) {
-		NomAppareil = nomAppareil;
+		_nomAppareil = nomAppareil;
 	}
-	
-	
-
 }
