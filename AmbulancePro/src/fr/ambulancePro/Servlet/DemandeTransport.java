@@ -1,7 +1,5 @@
 package fr.ambulancePro.Servlet;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -24,8 +21,7 @@ import javax.servlet.ServletContext;
 import fr.ambulancePro.DAO.DAOFactory;
 import fr.ambulancePro.DAO.DemandeTransportDao;
 import fr.ambulancePro.DAO.EtablissementDao;
-import fr.ambulancePro.Model.Connexion;
-import fr.ambulancePro.Model.EtablissementSante;
+import fr.ambulancePro.Model.EnsembleEtablissement;
 import fr.ambulancePro.Model.Malade;
 
 @Controller
@@ -33,15 +29,18 @@ public class DemandeTransport {
 	
 	public static final String CONF_DAO_FACTORY = "DAOFACTORY";
 	
-	private EtablissementDao dao;
+	private EtablissementDao daoEtablissement;
 	private DemandeTransportDao demandeDao;
+	
+	//Le Model
+	private EnsembleEtablissement _etablissements = new EnsembleEtablissement();
 	
 	@Autowired
 	private ServletContext context;
 	
-	//HashMap pour contenir l'ensembles de donnÃ©es et erreurs
+	//HashMap pour contenir l'ensembles de données et erreurs
 	Map<String, Map<String, Object>> dataErrorMap = new HashMap<String, Map<String,Object>>();
-	//HashMap pour les donnÃ©es reÃ§u pour un renvoi eventuel
+	//HashMap pour les données reçu pour un renvoi eventuel
 	Map<String,Object> data =  new HashMap<String, Object>();
 	//HashMap pour les erreurs
 	Map<String, Object> errors = new HashMap<String, Object>();
@@ -50,11 +49,12 @@ public class DemandeTransport {
 	public ModelAndView saisirDemandeTransport(){
 		errors.clear();
 		data.clear();
-		this.dao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getEtablissementDao();
+		
+		this.daoEtablissement = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getEtablissementDao();
 		this.demandeDao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getDemandeTransportDao();
-		ArrayList<EtablissementSante> etablissements = new ArrayList<EtablissementSante>();
-		etablissements = this.dao.recupererEnsemble();
-		data.put("etablissements", etablissements);
+		
+		_etablissements = this.daoEtablissement.recupererEnsemble();
+		data.put("etablissements", _etablissements.getEtablissements());
 		dataErrorMap.put("data",data);
 		return new ModelAndView("demandeTransport", "dataErrors", dataErrorMap);
 	}
@@ -69,7 +69,7 @@ public class DemandeTransport {
 									@RequestParam("nom_malade") String nom_malade,
 									@RequestParam("prenom_malade") String prenom_malade,
 									@RequestParam("adresse_malade") String adresse_malade){
-		System.out.println(etablissement);
+		//System.out.println(etablissement);
 		data.put("etablissement", etablissement);
 		data.put("date", date);
 		data.put("hour", heure);
@@ -82,8 +82,8 @@ public class DemandeTransport {
 		
 		errors.clear();
 		
-		if (etablissement == "") {
-			errors.put("etablissement", "Veuillez choisir un Ã©tablissement parmis la liste");
+		if (etablissement.isEmpty()) {
+			errors.put("etablissement", "Veuillez choisir un Etablissement parmis la liste");
 		}
 		
 		if (date.isEmpty()) {
@@ -125,42 +125,39 @@ public class DemandeTransport {
 				Time time = Time.valueOf(heure + ":" + min + ":" + "00");
 				
 				Malade malade = new Malade(nom_malade, prenom_malade, adresse_malade);
-				fr.ambulancePro.Model.DemandeTransport demande = new fr.ambulancePro.Model.DemandeTransport(date2, time, adresse_deb, adresse_fin, malade, Integer.parseInt(etablissement));
+				fr.ambulancePro.Model.DemandeTransport demande = new fr.ambulancePro.Model.DemandeTransport(date2, time, adresse_deb, adresse_fin, malade, this._etablissements.getEtablissementByID(etablissement));
 				demandeDao.creer(demande, malade);
 			
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
-			
 			return listeDemandeTransport();
 		}		
 	}
 	
-	@RequestMapping("listeDemandeTransport")
+	@RequestMapping("liste_demande_transport")
 	public ModelAndView listeDemandeTransport(){
 		errors.clear();
 		data.clear();
-		this.dao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getEtablissementDao();
+		this.daoEtablissement = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getEtablissementDao();
 		this.demandeDao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getDemandeTransportDao();
 		ArrayList<fr.ambulancePro.Model.DemandeTransport> demandes = new ArrayList<fr.ambulancePro.Model.DemandeTransport>();
 		demandes = this.demandeDao.listeDemandeTransport();
 		data.put("demandes", demandes);
 		dataErrorMap.put("data",data);
-		return new ModelAndView("listeDemandeTransport", "dataErrors", dataErrorMap);
+		return new ModelAndView("liste_demande_transport", "dataErrors", dataErrorMap);
 	}
 	
-	@RequestMapping("traiterDemande")
+	@RequestMapping("traiter_demande")
 	public ModelAndView traiterDemande (@RequestParam("id") String id){
 		
 		this.demandeDao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getDemandeTransportDao();
-		fr.ambulancePro.Model.DemandeTransport demande = demandeDao.trouver(Integer.parseInt(id));
+		fr.ambulancePro.Model.DemandeTransport demande = demandeDao.trouver(id);
 		errors.clear();
 		data.clear();
 		data.put("demande", demande);
-		return new ModelAndView("traiterDemande","data",data);
+		return new ModelAndView("traiter_demande","data",data);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "traiterDemande")

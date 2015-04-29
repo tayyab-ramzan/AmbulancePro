@@ -67,15 +67,13 @@ public class Personnel implements Comparable<Personnel>{
 	  
 	  @Override
 	  public int compareTo(Personnel p) {
-			
 		  if(p.getLoginPersonnel().compareTo(this._loginPersonnel) == 0){
 	
 			  if(p.getMdpPersonnel().compareTo(this._mdpPersonnel) == 0){
 				  return 0;
 			  }
 			  	return -1;
-			}
-			
+			}			
 			return -1;
 	  }
 }

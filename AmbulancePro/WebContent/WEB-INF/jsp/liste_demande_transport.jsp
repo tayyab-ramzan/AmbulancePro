@@ -10,15 +10,15 @@
 </head>
 <body>
 	<table class="listeDemande" style="width: 100%">
-		<th>id Demande Transport</th>
+		<th>ID Demande Transport</th>
 		<th>Nom Etablissement</th>
 		<th>Date et Heure</th>
 			<c:forEach var="demande" items="${dataErrors.data.demandes}">
 				<a href="#">
-					<tr onclick="document.location = 'traiterDemande.html?id=${demande.getIdDemandeTransport()}';">
+					<tr onclick="document.location = 'traiter_demande.html?id=${demande.getIdDemandeTransport()}';">
 						<td>${demande.getIdDemandeTransport() }</td>
-						<td>${demande.getEtablissement() }</td>
-						<td>${demande.getDateTransport() }
+						<td>${demande.getEtablissement().getNomEtablissement() }</td>
+						<td>Le ${demande.getDateTransport()} à ${demande.getHeureTransport() }
 					</tr>
 				</a>
 			</c:forEach>

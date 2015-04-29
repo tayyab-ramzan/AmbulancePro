@@ -30,18 +30,16 @@ public class Etablissement {
 	
 	@RequestMapping("etablissement")
 	public ModelAndView printForm(){
-		
-		this.dao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getEtablissementDao();
 		return new ModelAndView("etablissement");
-	}
-	
-	
+	}	
 	
 	@RequestMapping(method = RequestMethod.POST, value="etablissement")
 	public ModelAndView validateForm(@RequestParam("nom_etablissement") String nom,
 									 @RequestParam("adresse") String adresse,
 									 @RequestParam("email") String email,
 									 @RequestParam("tel") String tel){
+		
+		this.dao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getEtablissementDao();
 		
 		//HashMap pour contenir l'ensembles de données et erreurs
 		Map<String, Map<String, String>> dataErrorMap = new HashMap<String, Map<String,String>>();
@@ -62,11 +60,11 @@ public class Etablissement {
 		}
 		
 		if (!validationNom(nom)) {
-			errors.put("nom", "Le nom d'établissement doit contenit au minimum 3 caratères");
+			errors.put("nom", "Le nom d'Etablissement doit contenit au minimum 3 carat�res");
 		}
 		
 		if (!validationTel(tel)) {
-			errors.put("tel", "Le numéro de téléphone n'est pas valide");
+			errors.put("tel", "Le num�ro de telephone n'est pas valide");
 		}
 		
 		if (!validationAdresse(adresse)) {
@@ -82,15 +80,13 @@ public class Etablissement {
 			dao.creer(newEtablissement);
 			return new ModelAndView("liste_etablissement");
 		}
-		
 	}
 	
 	private boolean validationEmail( String email ){
-	    
-	        if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
-	            return false;
-	        }
-	        return true;
+		if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
+			return false;
+	    }
+	    return true;
 	}
 	
 	private boolean validationNom( String nom ){
@@ -115,7 +111,5 @@ public class Etablissement {
 	        return false;
 	    }
 	    return true;
-	}
-	
-	
+	}	
 }

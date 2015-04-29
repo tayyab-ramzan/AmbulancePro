@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -47,23 +48,23 @@
 				<c:forEach var="i" begin="9" end="17">
 					<c:choose>
 						<c:when test="${dataErrors.data.hour == i}">
-							<option selected>${i}</option>
+							<option selected><fmt:formatNumber type="number" minIntegerDigits="2" value="${i}" /></option>
 						</c:when>
 						<c:otherwise>
-							<option>${i}</option>
+							<option><fmt:formatNumber type="number" minIntegerDigits="2" value="${i}" /></option>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 			</select> :
 			<select id="min" name="min">
 				<option value="">Minute</option>
-				<c:forEach var="i" begin="0" end="59">
+				<c:forEach var="i" begin="00" end="59" step="15">
 					<c:choose>
 						<c:when test="${dataErrors.data.min == i}">
-							<option selected>${i}</option>
+							<option selected><fmt:formatNumber type="number" minIntegerDigits="2" value="${i}" /></option>
 						</c:when>
 						<c:otherwise>
-							<option>${i}</option>
+							<option><fmt:formatNumber type="number" minIntegerDigits="2" value="${i}" /></option>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

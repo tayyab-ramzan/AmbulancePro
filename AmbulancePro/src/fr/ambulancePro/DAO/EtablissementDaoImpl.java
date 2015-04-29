@@ -7,14 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static fr.ambulancePro.DAO.DAOUtilitaire.*;
+import fr.ambulancePro.Model.EnsembleEtablissement;
 import fr.ambulancePro.Model.EtablissementSante;
 
 public class EtablissementDaoImpl implements EtablissementDao {
 	private DAOFactory daoFactory;
 	
-	private static final String SQL_SELECT_PAR_ID = "SELECT * FROM etablissement WHERE id = ?";
-	private static final String SQL_SELECT_ALL = "SELECT * FROM etablissement";
-	private static final String SQL_INSERT = "INSERT INTO etablissement (nom_etablissement, adresse_etablissement, mail_etablissement, tel_etablissement) VALUES (?, ?, ?, ?)";
+	public static final String SQL_SELECT_PAR_ID = "SELECT * FROM etablissement WHERE id_etablissement = ?";
+	public static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as nbEtablissement FROM etablissement";
+	public static final String SQL_SELECT_ALL = "SELECT * FROM etablissement";
+	public static final String SQL_INSERT = "INSERT INTO etablissement (id_etablissement, nom_etablissement, adresse_etablissement, mail_etablissement, tel_etablissement) VALUES (?, ?, ?, ?, ?)";
 	
 	public EtablissementDaoImpl(DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
@@ -28,22 +30,17 @@ public class EtablissementDaoImpl implements EtablissementDao {
 	    ResultSet valeursAutoGenerees = null;
 
 	    try {
-	        /* Récupération d'une connexion depuis la Factory */
+	        /* R�cup�ration d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
-	        preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, etablissement.getNomEtablissement(), etablissement.getAdresseEtablissment(), etablissement.getMailEtablissment(), etablissement.getTelEtablissment() );
+	        String idEtablissement = "ES" + String.format("%04d", this.count()+1);
+	        preparedStatement = initialisationRequetePrepared( connexion, SQL_INSERT, false,idEtablissement, etablissement.getNomEtablissement(), etablissement.getAdresseEtablissment(), etablissement.getMailEtablissment(), etablissement.getTelEtablissment() );
 	        int statut = preparedStatement.executeUpdate();
 	        /* Analyse du statut retourné par la requête d'insertion */
 	        if ( statut == 0 ) {
-	            throw new DAOException( "Échec de la création de l'établissement, aucune ligne ajoutée dans la table." );
+	            throw new DAOException( "Echec de la cr�ation de l'Etablissement, aucune ligne ajout�e dans la table." );
 	        }
-	        /* Récupération de l'id auto-généré par la requête d'insertion */
-	        valeursAutoGenerees = preparedStatement.getGeneratedKeys();
-	        if ( valeursAutoGenerees.next() ) {
-	            /* Puis initialisation de la propriété id du bean Utilisateur avec sa valeur */
-	            etablissement.setIdEtablissement( valeursAutoGenerees.getInt( 1 ) );
-	        } else {
-	            throw new DAOException( "Échec de la création de l'établissement en base, aucun ID auto-généré retourné." );
-	        }
+	        etablissement.setIdEtablissement( idEtablissement );
+	        
 	    } catch ( SQLException e ) {
 	        throw new DAOException( e );
 	    } finally {
@@ -61,7 +58,7 @@ public class EtablissementDaoImpl implements EtablissementDao {
 	    try {
 	        /* Récupération d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
-	        preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_PAR_ID, false, id );
+	        preparedStatement = initialisationRequetePrepared( connexion, SQL_SELECT_PAR_ID, false, id );
 	        resultSet = preparedStatement.executeQuery();
 	        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
 	        if ( resultSet.next() ) {
@@ -80,9 +77,9 @@ public class EtablissementDaoImpl implements EtablissementDao {
 	 * mapping) entre une ligne issue de la table etablissement (un
 	 * ResultSet) et un bean etablissement.
 	 */
-	private static EtablissementSante map( ResultSet resultSet ) throws SQLException {
+	public static EtablissementSante map( ResultSet resultSet ) throws SQLException {
 		EtablissementSante etablissement = new EtablissementSante();
-		etablissement.setIdEtablissement( resultSet.getInt( "id_etablissement" ) );
+		etablissement.setIdEtablissement( resultSet.getString( "id_etablissement" ) );
 		etablissement.setNomEtablissment( resultSet.getString( "nom_etablissement" ) );
 		etablissement.setAdresseEtablissment( resultSet.getString( "adresse_etablissement" ) );
 		etablissement.setTelEtablissment( resultSet.getString( "tel_etablissement" ) );
@@ -91,21 +88,21 @@ public class EtablissementDaoImpl implements EtablissementDao {
 	}
 
 	@Override
-	public ArrayList<EtablissementSante> recupererEnsemble() throws DAOException {
+	public EnsembleEtablissement recupererEnsemble() throws DAOException {
 		// TODO Auto-generated method stub
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    ResultSet resultSet = null;
-	    ArrayList<EtablissementSante> etablissements = new ArrayList<EtablissementSante>();
+	    EnsembleEtablissement etablissements = new EnsembleEtablissement();
 	    
 	    try {
 	        /* Récupération d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
-	        preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL, false );
+	        preparedStatement = initialisationRequetePrepared( connexion, SQL_SELECT_ALL, false );
 	        resultSet = preparedStatement.executeQuery();
 	        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
 	        while (resultSet.next()) {
-	        	etablissements.add(map( resultSet ));
+	        	etablissements.addEtablissement(map( resultSet ));
 			}
 	    } catch ( SQLException e ) {
 	        throw new DAOException( e );
@@ -113,5 +110,30 @@ public class EtablissementDaoImpl implements EtablissementDao {
 	        fermeturesSilencieuses( resultSet, preparedStatement, connexion );
 	    }
 	    return etablissements;
+	}
+
+	@Override
+	public int count() throws DAOException {
+		// TODO Auto-generated method stub
+		Connection connexion = null;
+	    PreparedStatement preparedStatement = null;
+	    ResultSet resultSet = null;
+	    int nbEtablissement = 0;
+	    
+	    try {
+	        /* Récupération d'une connexion depuis la Factory */
+	        connexion = daoFactory.getConnection();
+	        preparedStatement = initialisationRequetePrepared( connexion, SQL_SELECT_COUNT, false );
+	        resultSet = preparedStatement.executeQuery();
+	        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
+	        if ( resultSet.next() ) {
+	            nbEtablissement = resultSet.getInt("nbEtablissement") ;
+	        }
+	    } catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+	    }
+	    return nbEtablissement;
 	}
 }

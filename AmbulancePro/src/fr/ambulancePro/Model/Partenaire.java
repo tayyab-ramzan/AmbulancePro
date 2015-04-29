@@ -2,47 +2,64 @@ package fr.ambulancePro.Model;
 
 public class Partenaire {
 	
+	private String _idPartenaire;
 	private String _nomPartenaire;
 	private String _adressePartenaire;
 	private String _mailPartenaire;
 	private String _telPartenaire;
 	
 	public Partenaire(String nomPartenaire, String adressePartenaire,String mailPartenaire, String telPartenaire) {
-		_nomPartenaire = nomPartenaire;
-		_adressePartenaire = adressePartenaire;
-		_mailPartenaire = mailPartenaire;
-		_telPartenaire = telPartenaire;
+		this._nomPartenaire = nomPartenaire;
+		this._adressePartenaire = adressePartenaire;
+		this._mailPartenaire = mailPartenaire;
+		this._telPartenaire = telPartenaire;
 	}
 	
+	public Partenaire(String idPartenaire, String nomPartenaire, String adressePartenaire,String mailPartenaire, String telPartenaire) {
+		this._idPartenaire = idPartenaire;
+		this._nomPartenaire = nomPartenaire;
+		this._adressePartenaire = adressePartenaire;
+		this._mailPartenaire = mailPartenaire;
+		this._telPartenaire = telPartenaire;
+	}
+		
+	public String get_idPartenaire() {
+		return this._idPartenaire;
+	}
+
+	public void set_idPartenaire(String _idPartenaire) {
+		this._idPartenaire = _idPartenaire;
+	}
+
 	public String getNomPartenaire() {
-		return _nomPartenaire;
+		return this._nomPartenaire;
 	}
 	
 	public void setNomPartenaire(String nomPartenaire) {
-		_nomPartenaire = nomPartenaire;
+		this._nomPartenaire = nomPartenaire;
 	}
 	
 	public String getAdressePartenaire() {
-		return _adressePartenaire;
+		return this._adressePartenaire;
 	}
 	
 	public void setAdressePartenaire(String adressePartenaire) {
-		_adressePartenaire = adressePartenaire;
+		this._adressePartenaire = adressePartenaire;
 	}
 	
 	public String getMailPartenaire() {
-		return _mailPartenaire;
+		return this._mailPartenaire;
 	}
 	
 	public void setMailPartenaire(String mailPartenaire) {
-		_mailPartenaire = mailPartenaire;
+		this._mailPartenaire = mailPartenaire;
 	}
 	
 	public String getTelPartenaire() {
-		return _telPartenaire;
+		return this._telPartenaire;
 	}
 	
 	public void setTelPartenaire(String telPartenaire) {
-		_telPartenaire = telPartenaire;
+		this._telPartenaire = telPartenaire;
 	}
 }

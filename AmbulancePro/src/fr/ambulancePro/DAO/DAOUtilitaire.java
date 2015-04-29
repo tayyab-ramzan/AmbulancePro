@@ -65,7 +65,7 @@ public final class DAOUtilitaire {
      * Initialise la requÃªte prÃ©parÃ©e basÃ©e sur la connexion passÃ©e en argument,
      * avec la requÃªte SQL et les objets donnÃ©s.
      */
-    public static PreparedStatement initialisationRequetePreparee( Connection connexion, String sql, boolean returnGeneratedKeys, Object... objets ) throws SQLException {
+    public static PreparedStatement initialisationRequetePrepared( Connection connexion, String sql, boolean returnGeneratedKeys, Object... objets ) throws SQLException {
         PreparedStatement preparedStatement = connexion.prepareStatement( sql, returnGeneratedKeys ? Statement.RETURN_GENERATED_KEYS : Statement.NO_GENERATED_KEYS );
         for ( int i = 0; i < objets.length; i++ ) {
             preparedStatement.setObject( i + 1, objets[i] );

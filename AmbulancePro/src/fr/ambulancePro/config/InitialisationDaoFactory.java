@@ -28,5 +28,4 @@ public class InitialisationDaoFactory implements ServletContextListener {
         /* Enregistrement dans un attribut ayant pour portée toute l'application */
         servletContext.setAttribute( ATT_DAO_FACTORY, this.daoFactory );
 	}
-
 }

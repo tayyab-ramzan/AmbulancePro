@@ -16,6 +16,26 @@ public class EnsembleEtablissement {
 	}
 	
 	public ArrayList<EtablissementSante> getEtablissements(){
-		return _etablissements;
+		return this._etablissements;
 	}
+	
+	public EtablissementSante getEtablissementByID(String id){
+		EtablissementSante etablissement = null;
+		boolean found = false;
+		int index = 0;
+		while(!found && index < _etablissements.size() ){
+			found = (this._etablissements.get(index).getIdEtablissement().equals(id));
+			index++;
+		}
+		//System.out.println(found);
+		if (found) {
+			etablissement = _etablissements.get(index-1);
+		}			
+		return etablissement;
+	}
+	
+	public boolean isEmpty(){
+		return this._etablissements.isEmpty();
+	}
+	
 }

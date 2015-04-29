@@ -5,13 +5,13 @@ import java.sql.Time;
 
 public class DemandeTransport {
 	
-	private int _idDemandeTransport;
+	private String _idDemandeTransport;
 	private Date  _dateTransport;
     private Time _heureTransport;
 	private String _adresseDebut;
 	private String  _adresseFin;
 	private Malade _malade;
-	private int _idEtablissment;
+	private EtablissementSante _etablissement;
 	private enum EtatDemandeTranposrt{ENCOUR, TRAITER, TRANSFERER};
 	private EtatDemandeTranposrt _etatDemandeTransport;
 
@@ -24,30 +24,30 @@ public class DemandeTransport {
 							String adresseDebut, 
 							String adresseFin,
 							Malade malade,
-							int idEtablissment) {
+							EtablissementSante etablissment) {
 		
 		this._dateTransport = dateTransport;
 		this._heureTransport = heureTransport;
 		this._adresseDebut = adresseDebut;
 		this._adresseFin = adresseFin;
 		this._malade = malade;
-		this._idEtablissment = idEtablissment;
+		this._etablissement = etablissment;
 	}
 	
-	public int getIdDemandeTransport() {
+	public String getIdDemandeTransport() {
 		return this._idDemandeTransport;
 	}
 
-	public void setIdDemandeTransport(int idDemandeTransport) {
+	public void setIdDemandeTransport(String idDemandeTransport) {
 		this._idDemandeTransport = idDemandeTransport;
 	}
 	
-	public int getEtablissement() {
-		return this._idEtablissment;
+	public EtablissementSante getEtablissement() {
+		return this._etablissement;
 	}
 	
-	public void setEtablissement(int etablissment) {
-		this._idEtablissment = etablissment;
+	public void setEtablissement(EtablissementSante etablissment) {
+		this._etablissement = etablissment;
 	}
 	
 	public Malade getMalade() {

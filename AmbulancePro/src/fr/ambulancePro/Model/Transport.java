@@ -14,7 +14,7 @@ public class Transport {
 	private Malade _malade;
 	private EtablissementSante _etablissment;
 		
-	private enum EtatTranposrt{EnAttente, Commencer, Ternminer,Facturer};
+	private enum EtatTranposrt{ENATTENTE, COMMENCER, TERMINER,FACTURER};
 	private EtatTranposrt _etatTransport;
 		
 	public Transport(Date dateTransport,Time heureTransport,String adresseDebut, String adresseFin, boolean urgent,boolean assise, Malade malade,EtablissementSante etablissment) {
@@ -26,6 +26,7 @@ public class Transport {
 		this._assise = assise;
 		this._malade = malade;
 		this._etablissment = etablissment;
+		this._etatTransport = EtatTranposrt.ENATTENTE;
 	}
 
 	public void CalculCourt(){
