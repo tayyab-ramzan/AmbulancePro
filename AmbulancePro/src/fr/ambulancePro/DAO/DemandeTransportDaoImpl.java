@@ -43,7 +43,7 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	        int statut = preparedStatement.executeUpdate();
 	        /* Analyse du statut retourné par la requête d'insertion */
 	        if ( statut == 0 ) {
-	            throw new DAOException( "Echec de la cr�tion du malade, aucune ligne ajout�e dans la table." );
+	            throw new DAOException( "Echec de la cr�tion du malade, aucune ligne ajout�e dans la table." );
 	        }
 	        /* Récupération de l'id auto-généré par la requête d'insertion */
 	        valeursAutoGenerees = preparedStatement.getGeneratedKeys();
@@ -79,6 +79,7 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    ResultSet resultSet = null;
+	    ResultSet resultSet2 = null;
 	    DemandeTransport demandeTransport = null;
 	    EtablissementSante etablissement = null;
 	    try {
@@ -89,6 +90,11 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
 	        if ( resultSet.next() ) {
 	        	demandeTransport = map( resultSet );
+	        	preparedStatement = initialisationRequetePrepared(connexion, EtablissementDaoImpl.SQL_SELECT_PAR_ID, false, resultSet.getString("id_etablissement"));
+	        	resultSet2 = preparedStatement.executeQuery();
+	        	if (resultSet2.next()) {
+					demandeTransport.setEtablissement(new EtablissementSante(resultSet2.getString("id_etablissement"), resultSet2.getString("nom_etablissement"), resultSet2.getString("adresse_etablissement"), resultSet2.getString("mail_etablissement"), resultSet2.getString("tel_etablissement")));
+				}
 	        }
 	    } catch ( SQLException e ) {
 	        throw new DAOException( e );
@@ -123,7 +129,7 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	    ArrayList<DemandeTransport> demandes = new ArrayList<DemandeTransport>();
 	    
 	    try {
-	        /* R�cup�ration d'une connexion depuis la Factory */
+	        /* R�cup�ration d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
 	        preparedStatement = initialisationRequetePrepared( connexion, SQL_SELECT_ALL, false );
 	        resultSet = preparedStatement.executeQuery();

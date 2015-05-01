@@ -12,8 +12,8 @@
  	
  	<div align='center'>
 		<h3>Traitement de Demande de Transport</h3><br><br>
-	 	<form class="form1" action="traiterDemande.html" method="POST">
-	 		<label>Établissement</label> <input type="text" value="${data.demande.getEtablissement()}" disabled><br>
+	 	<form class="form1" action="traiter_demande.html" method="POST">
+	 		<label>Établissement</label> <input type="text" value="${data.demande.getEtablissement().getIdEtablissement()} : ${data.demande.getEtablissement().getNomEtablissement()}" disabled><br>
 	 		<label>Date</label> <input type="text" value="${data.demande.getDateTransport()}" disabled><br>
 	 		<label>Heure</label> <input type="text" value="${data.demande.getHeureTransport()}" disabled><br>
 	 		<label>Adresse Départ</label> <input type="text" value="${data.demande.getAdresseDebut()}" disabled><br>
