@@ -1,5 +1,5 @@
 package fr.ambulancePro.Model;
 
-public class StrategiePlanning  implements StrategiePersonnel{
+public class StrategiePlanning  extends StrategiePersonnel{
 
 }

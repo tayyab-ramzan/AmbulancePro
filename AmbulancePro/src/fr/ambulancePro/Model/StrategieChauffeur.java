@@ -1,12 +1,8 @@
 package fr.ambulancePro.Model;
 
-public class StrategieChauffeur  implements StrategiePersonnel{
+public class StrategieChauffeur  extends StrategiePersonnel{
 	
-	
-	
-	
-	public void saisirDemande(){
-		
+	public StrategieChauffeur() {
+		this._intituleRole = "CHAUFFEUR";
 	}
-
 }

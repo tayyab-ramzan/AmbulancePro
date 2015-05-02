@@ -22,13 +22,14 @@ public class Personnel implements Comparable<Personnel>{
 	   */
 	  private PersonnelDAO _dao;
 	  public static final String CONF_DAO_FACTORY = "DAOFACTORY";
-
-	  private ServletContext context;
+	  
+	  private ServletContext _context;
 		
-	  public Personnel(String loginPersonnel, String mdpPersonnel) {
+	  public Personnel(String loginPersonnel, String mdpPersonnel, ServletContext context) {
 		  this._loginPersonnel = loginPersonnel;
 		  this._mdpPersonnel = mdpPersonnel;
-		  this._dao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getPersonnelDAO();
+		  this._context = context;
+		  this._dao = ( (DAOFactory) _context.getAttribute( CONF_DAO_FACTORY ) ).getPersonnelDAO();
 	  }
 
 	  public Personnel(String nomPersonnel, String prenomPersonnel,String loginPersonnel, String mdpPersonnel , StrategiePersonnel start) {
@@ -117,6 +118,15 @@ public class Personnel implements Comparable<Personnel>{
 	  }
 	  
 	  public boolean seConnecter(){
-		return false;
+		  Personnel personnel;
+		  personnel = this._dao.trouver(this._loginPersonnel, this._mdpPersonnel);
+		  if (personnel != null) {
+			  this._idPersonnel = personnel.getIdPersonnel();
+			  this._nomPersonnel = personnel.getNomPersonnel();
+			  this._prenomPersonnel = personnel.getPrenomPersonnel();
+			  this._niveauAcces = personnel.getNiveauAcces();
+			  return true;
+		  }
+		  return false;
 	  }
 }

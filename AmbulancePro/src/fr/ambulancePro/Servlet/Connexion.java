@@ -19,14 +19,17 @@ import fr.ambulancePro.Model.Personnel;
 @Controller
 public class Connexion {
 	
+	@Autowired
+	private ServletContext _context;
+	
 	private EnsemblePersonnel _personnel = new EnsemblePersonnel();
 	
 	@RequestMapping("index")
 	public ModelAndView verificationSession(HttpSession session){
-		if (session.getAttribute("CONNECTED") == null) {
+		if (session.getAttribute("USER") == null) {
 			return new ModelAndView("connexion");
 		}
-		return new ModelAndView("demandeTransport");
+		return new ModelAndView("accueil");
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value="connexion")
@@ -38,9 +41,14 @@ public class Connexion {
 			return new ModelAndView("connexion");
 		}
 		else {
-			Personnel user = new Personnel(login, password);
-			user.seConnecter();
+			Personnel user = new Personnel(login, password,this._context);
+			if (user.seConnecter()) {
+				session.setAttribute("USER", user);
+				return new ModelAndView("accueil");
+			}else{
+				return new ModelAndView("connexion");
+			}
 		}
-		return new ModelAndView("etablissement");
+		
 	}
 }
