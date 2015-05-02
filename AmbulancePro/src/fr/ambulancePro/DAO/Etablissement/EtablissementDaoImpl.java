@@ -1,4 +1,4 @@
-package fr.ambulancePro.DAO;
+package fr.ambulancePro.DAO.Etablissement;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static fr.ambulancePro.DAO.DAOUtilitaire.*;
+import fr.ambulancePro.DAO.DAOException;
+import fr.ambulancePro.DAO.DAOFactory;
 import fr.ambulancePro.Model.EnsembleEtablissement;
 import fr.ambulancePro.Model.EtablissementSante;
 
@@ -30,14 +32,14 @@ public class EtablissementDaoImpl implements EtablissementDao {
 	    ResultSet valeursAutoGenerees = null;
 
 	    try {
-	        /* Récupération d'une connexion depuis la Factory */
+	        /* Rï¿½cupï¿½ration d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
 	        String idEtablissement = "ES" + String.format("%04d", this.count()+1);
 	        preparedStatement = initialisationRequetePrepared( connexion, SQL_INSERT, false,idEtablissement, etablissement.getNomEtablissement(), etablissement.getAdresseEtablissment(), etablissement.getMailEtablissment(), etablissement.getTelEtablissment() );
 	        int statut = preparedStatement.executeUpdate();
 	        /* Analyse du statut retournÃ© par la requÃªte d'insertion */
 	        if ( statut == 0 ) {
-	            throw new DAOException( "Echec de la création de l'Etablissement, aucune ligne ajoutée dans la table." );
+	            throw new DAOException( "Echec de la crï¿½ation de l'Etablissement, aucune ligne ajoutï¿½e dans la table." );
 	        }
 	        etablissement.setIdEtablissement( idEtablissement );
 	        

@@ -1,16 +1,34 @@
 package fr.ambulancePro.Model;
 
-public class Personnel implements Comparable<Personnel>{
+import javax.servlet.ServletContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import fr.ambulancePro.DAO.DAOFactory;
+import fr.ambulancePro.DAO.Personnel.PersonnelDAO;
+
+public class Personnel implements Comparable<Personnel>{
+	
+	  private String _idPersonnel;
 	  private String _nomPersonnel;
 	  private String _prenomPersonnel;
 	  private String _loginPersonnel;
 	  private String  _mdpPersonnel;
+	  private int _niveauAcces;
 	  private StrategiePersonnel _strategie;
+	  
+	  /*
+	   *DAO pour le personnel 
+	   */
+	  private PersonnelDAO _dao;
+	  public static final String CONF_DAO_FACTORY = "DAOFACTORY";
+
+	  private ServletContext context;
 		
 	  public Personnel(String loginPersonnel, String mdpPersonnel) {
 		  this._loginPersonnel = loginPersonnel;
 		  this._mdpPersonnel = mdpPersonnel;
+		  this._dao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getPersonnelDAO();
 	  }
 
 	  public Personnel(String nomPersonnel, String prenomPersonnel,String loginPersonnel, String mdpPersonnel , StrategiePersonnel start) {
@@ -21,6 +39,18 @@ public class Personnel implements Comparable<Personnel>{
 		  this._strategie = start;
 	  }
 		
+	  public Personnel() {
+		// TODO Auto-generated constructor stub
+	  }
+
+	  public String getIdPersonnel() {
+		return this._idPersonnel;
+	  }
+
+	  public void setIdPersonnel(String _idPersonnel) {
+		this._idPersonnel = _idPersonnel;
+	  }
+
 	  public void changerStrategie(StrategiePersonnel s){	
 		  this._strategie = s;
 	  }
@@ -56,7 +86,16 @@ public class Personnel implements Comparable<Personnel>{
 	  public void setMdpPersonnel(String mdpPersonnel) {
 		  this._mdpPersonnel = mdpPersonnel;
 	  }
+	  
 		
+	  public int getNiveauAcces() {
+		return this._niveauAcces;
+	  }
+
+	  public void setNiveauAcces(int _niveauAcces) {
+		this._niveauAcces = _niveauAcces;
+	  }
+
 	  public StrategiePersonnel getStrategie() {
 		  return this._strategie;
 	  }
@@ -75,5 +114,9 @@ public class Personnel implements Comparable<Personnel>{
 			  	return -1;
 			}			
 			return -1;
+	  }
+	  
+	  public boolean seConnecter(){
+		return false;
 	  }
 }

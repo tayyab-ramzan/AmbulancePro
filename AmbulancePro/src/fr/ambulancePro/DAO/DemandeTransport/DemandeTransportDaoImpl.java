@@ -1,4 +1,4 @@
-package fr.ambulancePro.DAO;
+package fr.ambulancePro.DAO.DemandeTransport;
 
 import static fr.ambulancePro.DAO.DAOUtilitaire.*;
 
@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import fr.ambulancePro.DAO.DAOException;
+import fr.ambulancePro.DAO.DAOFactory;
+import fr.ambulancePro.DAO.Etablissement.EtablissementDaoImpl;
 import fr.ambulancePro.Model.DemandeTransport;
 import fr.ambulancePro.Model.EtablissementSante;
 import fr.ambulancePro.Model.Malade;

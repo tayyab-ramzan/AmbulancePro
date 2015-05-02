@@ -7,6 +7,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import fr.ambulancePro.DAO.DemandeTransport.*;
+import fr.ambulancePro.DAO.Etablissement.*;
+import fr.ambulancePro.DAO.Personnel.*;
+
 public class DAOFactory {
 	
 	private static DAOFactory instance;
@@ -25,7 +29,6 @@ public class DAOFactory {
         this.url = url;
         this.username = username;
         this.password = password;
-        System.out.println("Appel Constructeur");
     }
 
     /*
@@ -69,13 +72,12 @@ public class DAOFactory {
     }
 
     /* Méthode chargée de fournir une connexion à la base de données */
-     /* package */ Connection getConnection() throws SQLException {
+     /* package */ public Connection getConnection() throws SQLException {
         return DriverManager.getConnection( url, username, password );
     }
 
     /*
-     * Méthodes de récupération de l'implémentation des différents DAO (un seul
-     * pour le moment)
+     * Méthodes de récupération de l'implémentation des différents DAO 
      */
     public EtablissementDao getEtablissementDao() {
         return new EtablissementDaoImpl( this );
@@ -83,5 +85,9 @@ public class DAOFactory {
     
     public DemandeTransportDao getDemandeTransportDao(){
     	return new DemandeTransportDaoImpl(this);
+    }
+    
+    public PersonnelDAO getPersonnelDAO() {
+        return new PersonnelDAOImpl( this );
     }
 }

@@ -1,7 +1,8 @@
-package fr.ambulancePro.DAO;
+package fr.ambulancePro.DAO.DemandeTransport;
 
 import java.util.ArrayList;
 
+import fr.ambulancePro.DAO.DAOException;
 import fr.ambulancePro.Model.DemandeTransport;
 import fr.ambulancePro.Model.Malade;
 

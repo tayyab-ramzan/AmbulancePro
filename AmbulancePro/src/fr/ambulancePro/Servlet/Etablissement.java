@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.ambulancePro.DAO.DAOFactory;
-import fr.ambulancePro.DAO.EtablissementDao;
+import fr.ambulancePro.DAO.Etablissement.EtablissementDao;
 import fr.ambulancePro.Model.EtablissementSante;
 
 @Controller
@@ -60,11 +60,11 @@ public class Etablissement {
 		}
 		
 		if (!validationNom(nom)) {
-			errors.put("nom", "Le nom d'Etablissement doit contenit au minimum 3 caratères");
+			errors.put("nom", "Le nom d'Etablissement doit contenit au minimum 3 caratï¿½res");
 		}
 		
 		if (!validationTel(tel)) {
-			errors.put("tel", "Le numéro de telephone n'est pas valide");
+			errors.put("tel", "Le numï¿½ro de telephone n'est pas valide");
 		}
 		
 		if (!validationAdresse(adresse)) {

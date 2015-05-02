@@ -19,8 +19,8 @@ import java.text.SimpleDateFormat;
 import javax.servlet.ServletContext;
 
 import fr.ambulancePro.DAO.DAOFactory;
-import fr.ambulancePro.DAO.DemandeTransportDao;
-import fr.ambulancePro.DAO.EtablissementDao;
+import fr.ambulancePro.DAO.DemandeTransport.DemandeTransportDao;
+import fr.ambulancePro.DAO.Etablissement.EtablissementDao;
 import fr.ambulancePro.Model.EnsembleEtablissement;
 import fr.ambulancePro.Model.Malade;
 
@@ -38,9 +38,9 @@ public class DemandeTransport {
 	@Autowired
 	private ServletContext context;
 	
-	//HashMap pour contenir l'ensembles de données et erreurs
+	//HashMap pour contenir l'ensembles de donnï¿½es et erreurs
 	Map<String, Map<String, Object>> dataErrorMap = new HashMap<String, Map<String,Object>>();
-	//HashMap pour les données reçu pour un renvoi eventuel
+	//HashMap pour les donnï¿½es reï¿½u pour un renvoi eventuel
 	Map<String,Object> data =  new HashMap<String, Object>();
 	//HashMap pour les erreurs
 	Map<String, Object> errors = new HashMap<String, Object>();

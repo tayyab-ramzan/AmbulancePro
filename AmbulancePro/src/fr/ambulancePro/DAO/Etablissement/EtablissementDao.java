@@ -1,7 +1,8 @@
-package fr.ambulancePro.DAO;
+package fr.ambulancePro.DAO.Etablissement;
 
 import java.util.ArrayList;
 
+import fr.ambulancePro.DAO.DAOException;
 import fr.ambulancePro.Model.EnsembleEtablissement;
 import fr.ambulancePro.Model.EtablissementSante;
 

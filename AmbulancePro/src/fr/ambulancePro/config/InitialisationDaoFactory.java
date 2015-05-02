@@ -19,8 +19,6 @@ public class InitialisationDaoFactory implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-		// TODO Auto-generated method stub
-		System.out.println("Initialisation...");
 		/* Récupération du ServletContext lors du chargement de l'application */
         ServletContext servletContext = event.getServletContext();
         /* Instanciation de notre DAOFactory */
