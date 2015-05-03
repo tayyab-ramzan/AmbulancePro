@@ -6,4 +6,8 @@ public class StrategieAdmin extends StrategiePersonnel {
 		// TODO Auto-generated constructor stub
 		this._intituleRole = "ADMINISTRATEUR";
 	}
+	
+	public void ajouterPersonnel(Personnel p){
+		
+	}
 }

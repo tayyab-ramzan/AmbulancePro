@@ -22,14 +22,12 @@ public class Connexion {
 	@Autowired
 	private ServletContext _context;
 	
-	private EnsemblePersonnel _personnel = new EnsemblePersonnel();
-	
 	@RequestMapping("index")
 	public ModelAndView verificationSession(HttpSession session){
 		if (session.getAttribute("USER") == null) {
 			return new ModelAndView("connexion");
 		}
-		return new ModelAndView("accueil");
+		return redirection(session);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value="connexion")
@@ -37,18 +35,34 @@ public class Connexion {
 		boolean connected = true;
 		//session.setAttribute("CONNECTED", connected);
 		
-		if (password.isEmpty() || login.isEmpty()) {
-			return new ModelAndView("connexion");
-		}
-		else {
+		if (!password.isEmpty() && !login.isEmpty()) {
 			Personnel user = new Personnel(login, password,this._context);
 			if (user.seConnecter()) {
 				session.setAttribute("USER", user);
-				return new ModelAndView("accueil");
+				return redirection(session);
 			}else{
 				return new ModelAndView("connexion");
 			}
 		}
-		
+		return new ModelAndView("connexion");
+	}
+	
+	private ModelAndView redirection(HttpSession session){
+		Personnel p = (Personnel) session.getAttribute("USER");
+		session.setAttribute("USER", p);
+		switch ( p.getStrategie().get_intituleRole() ) {
+		case "OPERATEUR":
+			return new ModelAndView("accueil/accueil_admin");
+		case "PLANNING":
+			return new ModelAndView("accueil/accueil_admin");
+		case "FACTURATION":
+			return new ModelAndView("accueil/accueil_admin");
+		case "CHAUFFEUR":
+			return new ModelAndView("accueil/accueil_admin");
+		case "ADMINISTRATEUR":
+			return new ModelAndView("accueil/accueil_admin");
+		default:
+			return new ModelAndView("connexion");
+		}
 	}
 }

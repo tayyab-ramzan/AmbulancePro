@@ -3,6 +3,7 @@ package fr.ambulancePro.Model;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ModelAndView;
 
 import fr.ambulancePro.DAO.DAOFactory;
 import fr.ambulancePro.DAO.Personnel.PersonnelDAO;
@@ -32,12 +33,10 @@ public class Personnel implements Comparable<Personnel>{
 		  this._dao = ( (DAOFactory) _context.getAttribute( CONF_DAO_FACTORY ) ).getPersonnelDAO();
 	  }
 
-	  public Personnel(String nomPersonnel, String prenomPersonnel,String loginPersonnel, String mdpPersonnel , StrategiePersonnel start) {
+	  public Personnel(String nomPersonnel, String prenomPersonnel,String loginPersonnel) {
 		  this._nomPersonnel = nomPersonnel;
 		  this._prenomPersonnel = prenomPersonnel;
 		  this._loginPersonnel = loginPersonnel;
-		  this._mdpPersonnel = mdpPersonnel;
-		  this._strategie = start;
 	  }
 		
 	  public Personnel() {
@@ -125,8 +124,31 @@ public class Personnel implements Comparable<Personnel>{
 			  this._nomPersonnel = personnel.getNomPersonnel();
 			  this._prenomPersonnel = personnel.getPrenomPersonnel();
 			  this._niveauAcces = personnel.getNiveauAcces();
+			  this._strategie = personnel.getStrategie();
 			  return true;
 		  }
 		  return false;
 	  }
+	  
+	  public void setStrategieByName(String role) {
+		  switch ( role ) {
+			case "OPERATEUR":
+				this._strategie = new StrategieOperateur();
+				break;
+			case "PLANNING":
+				this._strategie = new StrategiePlanning();
+				break;
+			case "FACTURATION":
+				this._strategie = new StrategieFacuration();
+				break;
+			case "CHAUFFEUR":
+				this._strategie = new StrategieChauffeur();
+				break;
+			case "ADMINISTRATEUR":
+				this._strategie = new StrategieAdmin();
+				break;
+			default:
+				break;
+		}
+	}
 }

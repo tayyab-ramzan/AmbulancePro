@@ -26,6 +26,10 @@ public class PersonnelDAOImpl implements PersonnelDAO {
 	
 	public static final String SQL_SELECT_ALL = "SELECT * FROM personnel P, role_personnel RP WHERE P.id_role_personnel = RP.id_role_personnel ";
 	public static final String SQL_SELECT_BY_LOGIN = "SELECT * FROM personnel P, role_personnel RP WHERE P.id_role_personnel = RP.id_role_personnel AND login_personnel = ? AND mdp_personnel = ?";	
+	public static final String SQL_SELECT_ROLE_BY_NAME = "SELECT id_role_personnel FROM role_personnel WHERE libelle = ?";
+	public static final String SQL_INSERT = "INSERT INTO personnel (id_personnel, nom_personnel, prenom_personnel, login_personnel, id_role_personnel) VALUES (?, ?, ?, ?, ?)";
+	public static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as nbPersonnel FROM personnel";
+	
 	public PersonnelDAOImpl(DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
 	}
@@ -98,7 +102,6 @@ public class PersonnelDAOImpl implements PersonnelDAO {
 			preparedStatement = initialisationRequetePrepared( connexion, SQL_SELECT_BY_LOGIN, false, login, password );
 			resultSet = preparedStatement.executeQuery();
 			/* Parcours de la ligne de données de l'éventuel ResulSet retourné */
-			System.out.println(resultSet);
 			while (resultSet.next()) {
 				personnel = ( map( resultSet ) );
 			}
@@ -108,5 +111,80 @@ public class PersonnelDAOImpl implements PersonnelDAO {
 	    	fermeturesSilencieuses( resultSet, preparedStatement, connexion );
 	    }
 		return personnel;
+	}
+
+	@Override
+	public void creer(Personnel p) throws DAOException {
+		// TODO Auto-generated method stub
+		Connection connexion = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet valeursAutoGenerees = null;
+
+		try {
+			 /* R�cup�ration d'une connexion depuis la Factory */
+			 connexion = daoFactory.getConnection();
+			 String idPersonnel = "PR" + String.format("%04d", this.count()+1);
+			 preparedStatement = initialisationRequetePrepared( connexion, SQL_INSERT, false,idPersonnel, p.getNomPersonnel(), p.getPrenomPersonnel(), p.getLoginPersonnel(), getRoleId(p.getStrategie().get_intituleRole()) );
+			 int statut = preparedStatement.executeUpdate();
+			 /* Analyse du statut retourné par la requête d'insertion */
+			 if ( statut == 0 ) {
+				 throw new DAOException( "Echec de la cr�ation de l'Etablissement, aucune ligne ajout�e dans la table." );
+			 }
+			p.setIdPersonnel(idPersonnel);
+			        
+			 } catch ( SQLException e ) {
+				 throw new DAOException( e );
+			 } finally {
+				 fermeturesSilencieuses( valeursAutoGenerees, preparedStatement, connexion );
+		}
+	}
+
+	@Override
+	public int count() throws DAOException {
+		// TODO Auto-generated method stub
+				Connection connexion = null;
+			    PreparedStatement preparedStatement = null;
+			    ResultSet resultSet = null;
+			    int nbPersonnel = 0;
+			    
+			    try {
+			        /* Récupération d'une connexion depuis la Factory */
+			        connexion = daoFactory.getConnection();
+			        preparedStatement = initialisationRequetePrepared( connexion, SQL_SELECT_COUNT, false );
+			        resultSet = preparedStatement.executeQuery();
+			        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
+			        if ( resultSet.next() ) {
+			        	nbPersonnel = resultSet.getInt("nbPersonnel") ;
+			        }
+			    } catch ( SQLException e ) {
+			        throw new DAOException( e );
+			    } finally {
+			        fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+			    }
+			    return nbPersonnel;
+	}
+
+	@Override
+	public String getRoleId(String role) throws DAOException {
+		String id = null;
+		Connection connexion = null;
+	    PreparedStatement preparedStatement = null;
+	    ResultSet resultSet = null;
+	    
+	    try {
+	        /* Récupération d'une connexion depuis la Factory */
+	        connexion = daoFactory.getConnection();
+	        preparedStatement = initialisationRequetePrepared( connexion, SQL_SELECT_ROLE_BY_NAME, false, role);
+	        resultSet = preparedStatement.executeQuery();
+	        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
+	        if ( resultSet.next() ) {
+	        	id = resultSet.getString("id_role_personnel") ;
+	        }
+	    } catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+	    }
+	    return id;
 	}
 }

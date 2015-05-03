@@ -28,10 +28,10 @@ textarea { overflow: auto; }
 
 article, aside, details, footer, header, menu, nav, section { display: block; }
 
-.shell { width: 990px; margin: 0 auto; }
+.shell { width: 60%; margin: 0 auto; }
 .container { background: #fff; box-shadow: 0px 0px 13px rgba(0,0,0,0.3) ; -moz-box-shadow: 0px 0px 13px rgba(0,0,0,0.3) ; -webkit-box-shadow: 0px 0px 13px rgba(0,0,0,0.3) ; -o-box-shadow: 0px 0px 13px rgba(0,0,0,0.3) ;  }
 #header { height: 54px; padding-top: 21px; padding-left: 33px; padding-right: 17px;  }
-#logo { width: 136px; float: right; font-size: 0; line-height: 0;}
+#logo { width: 94px; float: right; font-size: 0; line-height: 0;}
 #logo a { height: 73px; display: block; background: url(images/Logoanime2.png) no-repeat 0 0;  text-indent: -4000px; }
 
 .search { float: right; }
@@ -65,12 +65,12 @@ article, aside, details, footer, header, menu, nav, section { display: block; }
 .flex-control-nav { left: 480px; }
 .main a.m-btn-grey { display: none; }
 
-.main { padding: 47px 0px 0px;  background: url(images/main.png) repeat-x 0 0; }
+.main { padding: 0px 0px 0px;  background: url(images/main.png) repeat-x 0 0; }
 .main h2 { font-size: 22px; color: #B40404; line-height: 22px; padding-bottom: 8px; font-family: 'Ubuntu', sans-serif; font-weight: 500; }
 .main h3 { font-size: 18px; color: #5e5e5e; line-height: 22px; padding-bottom: 8px; font-family: 'Ubuntu', sans-serif; font-weight: 500;  }
 .main section { clear: both; background: url(images/section-shadow.png) no-repeat center bottom; padding: 0 20px 60px; }
 .main ul { list-style: none; list-style-position: outside; }
-.main ul li { padding-bottom: 6px; padding-left: 10px; background: url(images/arr-ico.png) no-repeat 0 8px; }
+
 .main ul li a { color: #B40404; text-decoration: underline; } 
 .main ul li a:hover { text-decoration: none; } 
 
@@ -79,7 +79,7 @@ article, aside, details, footer, header, menu, nav, section { display: block; }
 .main .cols .col:after { content:''; width: 100%; clear: both; }
 .main .cols .col + .col { padding-left: 20px; }
 .main .cols .col img { float: left; width: 129px; height: 108px;  }
-.main .cols .col-cnt { width: 183px; float: right; }
+.main .cols .col-cnt { width: 183px; float: right;}
 
 .main .post  { background: url(images/cols-shadow.png) no-repeat 0 bottom; padding-top: 28px; padding-left: 40px;  }
 .main .post .video-holder { width: 435px; height: 245px; float: left; margin-right: 20px; }
@@ -269,4 +269,46 @@ article, aside, details, footer, header, menu, nav, section { display: block; }
 	#navigation a.nav-btn span.arr.active { background: url(images/nav-arr@2x.png) no-repeat 0 bottom; -webkit-background-size: 13px 18px; -moz-background-size: 13px 18px; background-size: 13px 18px; }
 
 	#logo a { background: url(images/logoanime2.png) no-repeat 0 0; -webkit-background-size: 81px 33px; -moz-background-size: 81px 33px; background-size: 81px 33px;  }
+}
+
+div.contenu {
+    position: relative;
+    padding: 50px;
+}
+
+div.sous-contenu{
+	margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+.sous-contenu table {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+div.contenu table tr {
+	border : solid thin;
+}
+
+div.contenu table tr th {
+	border : solid thin;
+}
+div.contenu table tr td {
+	border : solid thin;
+}
+
+.ajout{
+	position: absolute;
+	top:-50px;
+	left:5px;
 }

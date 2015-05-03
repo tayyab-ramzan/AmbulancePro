@@ -1,8 +1,6 @@
 @CHARSET "ISO-8859-1";
  .form1 {
- 	border: thin solid black;
- 	padding-bottom: 20px;
- 	padding-top: 20px;
+ 	padding-top: -100px;
  	width: 650px;
 }
 
