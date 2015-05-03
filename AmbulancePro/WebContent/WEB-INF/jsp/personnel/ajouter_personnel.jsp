@@ -64,8 +64,9 @@
 			  					</section>
 							</div>
 							<div class="contenu">
-								<form class="form1" method="POST" action="ajouter_personnel.html">
-									<label>Rôle:</label><input type="text" id="role" name="role" disabled value=${ data.ROLE }>
+								<form class= "form1" action="ajouter_personnel.html" method="POST">
+									<input type="hidden" id="role" name="role" value=${ data.ROLE }>
+									<label>Rôle:</label><input type="text" disabled value=${ data.ROLE }>
 									<br>
 									<label>Nom:</label><input type="text" id="nom" name="nom" value="${data.nom }" placeholder="Veuillez saisir le nom">${data.errors.nom}
 									<br>

@@ -58,8 +58,8 @@
 				<ul>
 					<li class="active"><a href="personnel.html?role=ADMINISTRATEUR" >Administrateur</a></li>
 					<li class="active"><a href="personnel.html?role=OPERATEUR" >Opérateur</a></li>
-					<li class="active"><a href="personnel.html?role='PLANNING'">Planning</a></li>
-					<li class="active"><a href="personnel.html?role='FACTURATION'">Facturation</a></li>
+					<li class="active"><a href="personnel.html?role=PLANNING">Planning</a></li>
+					<li class="active"><a href="personnel.html?role=FACTURATION">Facturation</a></li>
 					<li class="active"><a style="color: #8A0808" >Chauffeur</a></li>
 				</ul>
 			</nav>

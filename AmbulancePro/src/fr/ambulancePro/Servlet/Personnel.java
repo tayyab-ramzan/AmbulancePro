@@ -45,7 +45,7 @@ public class Personnel {
 		return new ModelAndView("personnel/personnel","data",data);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "ajouter_personnel")
+	@RequestMapping(value = "ajouter_personnel")
 	public ModelAndView ajouterPersonnel(@RequestParam("role")String role){
 		Map<String,Object> data =  new HashMap<String, Object>();
 		data.put("ROLE", role);
@@ -56,8 +56,8 @@ public class Personnel {
 	/*
 	 * 
 	 */
-	@RequestMapping(method = RequestMethod.POST, value="ajouter_personnel")
-	public ModelAndView ajouterPersonnel(@RequestParam("nom")String nom,
+	@RequestMapping(method = RequestMethod.POST, value = "ajouter_personnel")
+	public ModelAndView creerPersonnel(@RequestParam("nom")String nom,
 										 @RequestParam("role")String role,
 										 @RequestParam("prenom")String prenom,
 										 @RequestParam("email")String email){
@@ -90,7 +90,7 @@ public class Personnel {
 			fr.ambulancePro.Model.Personnel newPersonnel = new fr.ambulancePro.Model.Personnel(nom, prenom, email);
 			newPersonnel.setStrategieByName(role);
 			this._personnel.creerPersonnel(newPersonnel);
-			return new ModelAndView("liste_etablissement");
+			return new ModelAndView("redirect:personnel.html?role=" + role);
 		}
 	}
 	

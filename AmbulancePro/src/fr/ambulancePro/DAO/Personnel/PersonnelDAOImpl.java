@@ -48,7 +48,7 @@ public class PersonnelDAOImpl implements PersonnelDAO {
 			preparedStatement = initialisationRequetePrepared( connexion, SQL_SELECT_ALL, false );
 			resultSet = preparedStatement.executeQuery();
 			/* Parcours de la ligne de données de l'éventuel ResulSet retourné */
-			while (resultSet.next()) {
+			while (resultSet.next()) {				
 				personnel.addPersonnel( map( resultSet ) );
 			}
 		} catch ( SQLException e ) {
@@ -80,11 +80,14 @@ public class PersonnelDAOImpl implements PersonnelDAO {
 			break;
 		case "CHAUFFEUR":
 			personnel.setStrategie(new StrategieChauffeur());
+			break;
 		case "ADMINISTRATEUR":
 			personnel.setStrategie(new StrategieAdmin());
+			break;
 		default:
 			break;
 		}
+		System.out.println(personnel.getStrategie().get_intituleRole());
 	    return personnel;
 	}
 
