@@ -7,9 +7,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import fr.ambulancePro.DAO.Appareil.AppareilDAOImpl;
+import fr.ambulancePro.DAO.Appareil.AppareilDao;
 import fr.ambulancePro.DAO.DemandeTransport.*;
 import fr.ambulancePro.DAO.Etablissement.*;
 import fr.ambulancePro.DAO.Personnel.*;
+import fr.ambulancePro.DAO.Vehicule.VehiculeDAOImpl;
+import fr.ambulancePro.DAO.Vehicule.VehiculeDao;
 
 public class DAOFactory {
 	
@@ -89,5 +93,13 @@ public class DAOFactory {
     
     public PersonnelDAO getPersonnelDAO() {
         return new PersonnelDAOImpl( this );
+    }
+    
+    public VehiculeDao getVehiculeDAO(){
+    	return new VehiculeDAOImpl( this );
+    }
+    
+    public AppareilDao getAppareilDAO(){
+    	return new AppareilDAOImpl( this );
     }
 }

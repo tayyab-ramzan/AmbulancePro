@@ -1,8 +1,8 @@
 package fr.ambulancePro.DAO.Personnel;
 
 import fr.ambulancePro.DAO.DAOException;
-import fr.ambulancePro.Model.EnsemblePersonnel;
 import fr.ambulancePro.Model.Personnel;
+import fr.ambulancePro.Model.Ensemble.EnsemblePersonnel;
 
 public interface PersonnelDAO {
 	public void creer(Personnel p) throws DAOException;

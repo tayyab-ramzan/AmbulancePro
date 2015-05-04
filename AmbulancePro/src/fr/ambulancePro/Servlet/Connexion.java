@@ -13,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import fr.ambulancePro.DAO.DAOFactory;
 import fr.ambulancePro.DAO.Personnel.PersonnelDAO;
 import fr.ambulancePro.DAO.Personnel.PersonnelDAOImpl;
-import fr.ambulancePro.Model.EnsemblePersonnel;
 import fr.ambulancePro.Model.Personnel;
+import fr.ambulancePro.Model.Ensemble.EnsemblePersonnel;
 
 @Controller
 public class Connexion {

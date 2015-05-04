@@ -1,4 +1,4 @@
-package fr.ambulancePro.Model;
+package fr.ambulancePro.Model.Ensemble;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 
 import fr.ambulancePro.DAO.DAOFactory;
 import fr.ambulancePro.DAO.Personnel.PersonnelDAO;
+import fr.ambulancePro.Model.Personnel;
 
 public class EnsemblePersonnel {
 	
@@ -67,9 +68,6 @@ public class EnsemblePersonnel {
 	
 	public void remplir(){
 		this._personnels = this._dao.recupererEnsemblePersonnel().getPersonnels();
-		for (int i = 0; i < this._personnels.size(); i++) {
-			System.out.println(i + " : " + this._personnels.get(i).getStrategie().get_intituleRole());
-		}
 	}
 	
 	public ArrayList<Personnel> getByRole(String role){

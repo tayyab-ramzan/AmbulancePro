@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import static fr.ambulancePro.DAO.DAOUtilitaire.*;
 import fr.ambulancePro.DAO.DAOException;
 import fr.ambulancePro.DAO.DAOFactory;
-import fr.ambulancePro.Model.EnsembleEtablissement;
 import fr.ambulancePro.Model.EtablissementSante;
+import fr.ambulancePro.Model.Ensemble.EnsembleEtablissement;
 
 public class EtablissementDaoImpl implements EtablissementDao {
 	private DAOFactory daoFactory;

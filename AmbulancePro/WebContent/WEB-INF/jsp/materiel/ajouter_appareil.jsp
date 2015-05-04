@@ -10,6 +10,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="css/images/favicon.ico" />
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/form.css" type="text/css" media="all" />
 	
 	<script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>
 	
@@ -43,7 +44,7 @@
 								<h3 style="font-size: 30px">GESTION DU PERSONNEL</h3><br>
 								<img width="200" height="200" src="css/images/icone personnel.png" alt="" />
 								<section class="cols"  >
-									<c:import url="../personnel/sous-menu.jsp"></c:import>
+									<c:import url="../materiel/sous-menu.jsp"></c:import>
 									 <!-- <div class="col">
 									 <div class="col-cnt"> 
 									  
@@ -61,33 +62,19 @@
 								
 			  					</section>
 							</div>
-							
 							<div class="contenu">
-									<div class="sous-contenu">
-										<div class="ajout"> 
-									 		<a href="ajouter_personnel.html?role=${ data.ROLE }"><h2>Ajouter Membre</h2></a>  
-									 	</div>
-									<table>
-										<tr>
-											<th>ID</th>
-											<th>Membre</th>
-											<th>E-mail</th>
-											<th>Rôle</th>
-											<th>Action</th>
-										</tr>
-										<c:forEach var="membre" items="${data.personnel}">
-											<a href="#">
-												<tr>
-													<td>${membre.getIdPersonnel()}</td>
-													<td>${membre.getPrenomPersonnel()} ${membre.getNomPersonnel()}</td>
-													<td>${membre.getLoginPersonnel()}</td>
-													<td>${membre.getStrategie().get_intituleRole()}</td>
-													<td><a>Supprimer</a> / <a>Modifier</a></td>
-												</tr>
-											</a>
-										</c:forEach>
-									</table>
-								</div>
+								<form class= "form1" action="ajouter_personnel.html" method="POST">
+									<input type="hidden" id="role" name="role" value=${ data.ROLE }>
+									<label>Rôle:</label><input type="text" disabled value=${ data.ROLE }>
+									<br>
+									<label>Nom:</label><input type="text" id="nom" name="nom" value="${data.nom }" placeholder="Veuillez saisir le nom">${data.errors.nom}
+									<br>
+									<label>Prénom:</label><input type="text" id="prenom" name="prenom" value="${ data.prenom }" placeholder="Veuillez saisir le prénom">${data.errors.prenom}
+									<br>
+									<label>E-mail:</label><input type="text" id="email" name="email" value="${ data.email }" placeholder="Veuillez saisir l'adresse e-mail">${data.errors.email}
+									<br>
+									<button type="submit" name="submit">AJOUTER </button>
+								</form>
 							</div>
 					</section>			
 				</div>

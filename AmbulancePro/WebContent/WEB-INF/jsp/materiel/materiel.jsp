@@ -33,8 +33,8 @@
 				<div class="main">
 					<nav id ="navigation"> 
 						<ul>
-							<li class="active"><a style="color: #8A0808" >Gestion du personnel</a></li>
-							<li class="active"><a  href="materiel.html?mat=VEHICULE">Gestion du Matériel</a></li>
+							<li class="active"><a  href="personnel.html?role=ADMINISTRATEUR">Gestion du personnel</a></li>
+							<li class="active"><a  style="color: #8A0808">Gestion du Matériel</a></li>
 						</ul>
 					</nav>
 				
@@ -43,7 +43,7 @@
 								<h3 style="font-size: 30px">GESTION DU PERSONNEL</h3><br>
 								<img width="200" height="200" src="css/images/icone personnel.png" alt="" />
 								<section class="cols"  >
-									<c:import url="../personnel/sous-menu.jsp"></c:import>
+									<c:import url="../materiel/sous-menu.jsp"></c:import>
 									 <!-- <div class="col">
 									 <div class="col-cnt"> 
 									  
@@ -62,33 +62,14 @@
 			  					</section>
 							</div>
 							
-							<div class="contenu">
-									<div class="sous-contenu">
-										<div class="ajout"> 
-									 		<a href="ajouter_personnel.html?role=${ data.ROLE }"><h2>Ajouter Membre</h2></a>  
-									 	</div>
-									<table>
-										<tr>
-											<th>ID</th>
-											<th>Membre</th>
-											<th>E-mail</th>
-											<th>Rôle</th>
-											<th>Action</th>
-										</tr>
-										<c:forEach var="membre" items="${data.personnel}">
-											<a href="#">
-												<tr>
-													<td>${membre.getIdPersonnel()}</td>
-													<td>${membre.getPrenomPersonnel()} ${membre.getNomPersonnel()}</td>
-													<td>${membre.getLoginPersonnel()}</td>
-													<td>${membre.getStrategie().get_intituleRole()}</td>
-													<td><a>Supprimer</a> / <a>Modifier</a></td>
-												</tr>
-											</a>
-										</c:forEach>
-									</table>
-								</div>
-							</div>
+							<c:choose>
+								<c:when test="${data.MAT == 'VEHICULE'}">
+									<c:import url="../materiel/vehicule.jsp"></c:import>
+								</c:when>
+								<c:when test="${data.MAT == 'APPAREIL'}">
+									<c:import url="../materiel/appareil.jsp"></c:import>
+								</c:when>	
+							</c:choose>
 					</section>			
 				</div>
 				<!-- end of main -->

@@ -21,8 +21,8 @@ import javax.servlet.ServletContext;
 import fr.ambulancePro.DAO.DAOFactory;
 import fr.ambulancePro.DAO.DemandeTransport.DemandeTransportDao;
 import fr.ambulancePro.DAO.Etablissement.EtablissementDao;
-import fr.ambulancePro.Model.EnsembleEtablissement;
 import fr.ambulancePro.Model.Malade;
+import fr.ambulancePro.Model.Ensemble.EnsembleEtablissement;
 
 @Controller
 public class DemandeTransport {

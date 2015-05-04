@@ -35,8 +35,7 @@
 					<nav id ="navigation"> 
 						<ul>
 							<li class="active"><a style="color: #8A0808" >Gestion du personnel</a></li>
-							<li class="active"><a  href="GestionMateriel.jsp">Gestion des Appareils</a></li>
-							<li class="active"><a  href="GestionMateriel.jsp">Gestion du Parc Automobile</a></li>
+							<li class="active"><a  href="materiel.html?mat=VEHICULE">Gestion du Matériel</a></li>
 						</ul>
 					</nav>
 				

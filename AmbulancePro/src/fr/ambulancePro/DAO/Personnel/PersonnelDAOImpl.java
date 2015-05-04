@@ -8,8 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.ambulancePro.Model.EnsembleEtablissement;
-import fr.ambulancePro.Model.EnsemblePersonnel;
 import fr.ambulancePro.Model.EtablissementSante;
 import fr.ambulancePro.Model.Personnel;
 import fr.ambulancePro.Model.StrategieAdmin;
@@ -17,6 +15,8 @@ import fr.ambulancePro.Model.StrategieChauffeur;
 import fr.ambulancePro.Model.StrategieFacuration;
 import fr.ambulancePro.Model.StrategieOperateur;
 import fr.ambulancePro.Model.StrategiePlanning;
+import fr.ambulancePro.Model.Ensemble.EnsembleEtablissement;
+import fr.ambulancePro.Model.Ensemble.EnsemblePersonnel;
 import static fr.ambulancePro.DAO.DAOUtilitaire.*;
 import fr.ambulancePro.DAO.*;
 
@@ -87,7 +87,6 @@ public class PersonnelDAOImpl implements PersonnelDAO {
 		default:
 			break;
 		}
-		System.out.println(personnel.getStrategie().get_intituleRole());
 	    return personnel;
 	}
 

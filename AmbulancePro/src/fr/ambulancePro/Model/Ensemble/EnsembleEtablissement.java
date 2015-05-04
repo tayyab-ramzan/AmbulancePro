@@ -1,6 +1,8 @@
-package fr.ambulancePro.Model;
+package fr.ambulancePro.Model.Ensemble;
 
 import java.util.ArrayList;
+
+import fr.ambulancePro.Model.EtablissementSante;
 
 public class EnsembleEtablissement {
 	

@@ -71,7 +71,7 @@
 							<img src="css/images/iconemateriel.png" alt="" />
 							<div class="col-cnt">
 							    <h2>Gestion du matériel / véhicule</h2>
-								<a href="GestionMateriel.jsp" class="more"> Entrer </a>
+								<a href="materiel.html?mat=VEHICULE" class="more"> Entrer </a>
 							</div>
 						</div>
 						<div class="cl">&nbsp;</div>
