@@ -29,11 +29,16 @@ public class Etablissement {
 	private ServletContext context;
 	
 	@RequestMapping("etablissement")
-	public ModelAndView printForm(){
-		return new ModelAndView("etablissement");
-	}	
+	public ModelAndView etablissement(){
+		return new ModelAndView("etablissement/etablissement");
+	}
 	
-	@RequestMapping(method = RequestMethod.POST, value="etablissement")
+	@RequestMapping("creer_etablissement")
+	public ModelAndView printForm(){
+		return new ModelAndView("etablissement/creer_etablissement");
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value="creer_etablissement")
 	public ModelAndView validateForm(@RequestParam("nom_etablissement") String nom,
 									 @RequestParam("adresse") String adresse,
 									 @RequestParam("email") String email,
@@ -74,11 +79,11 @@ public class Etablissement {
 		if (!errors.isEmpty()) {
 			dataErrorMap.put("data", data);
 			dataErrorMap.put("errors",errors);
-			return new ModelAndView("etablissement", "dataErrors", dataErrorMap);
+			return new ModelAndView("etablissement/creer_etablissement", "dataErrors", dataErrorMap);
 		}else{
 			EtablissementSante newEtablissement = new EtablissementSante(nom, adresse, email, tel);
 			dao.creer(newEtablissement);
-			return new ModelAndView("liste_etablissement");
+			return new ModelAndView("etablissement/etablissement");
 		}
 	}
 	

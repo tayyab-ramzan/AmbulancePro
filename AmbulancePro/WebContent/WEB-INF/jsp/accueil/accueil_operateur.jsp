@@ -71,7 +71,7 @@
 							<img src="css/images/icone hopital.png" alt="" />
 							<div class="col-cnt">
 							    <h2>Établissement</h2>
-								<a href="materiel.html?mat=VEHICULE" class="more"> Entrer </a>
+								<a href="etablissement.html" class="more"> Entrer </a>
 							</div>
 						</div>
 						<div class="cl">&nbsp;</div>
