@@ -18,7 +18,7 @@
 	<nav id="navigation">
 			<ul>
 				<li class="active"><a href="accueil.html">HOME</a></li>
-				<li><a href="#">Se deconnecter</a></li>
+				<li><a href="deconnexion.html">Se deconnecter</a></li>
 			</ul>
 	</nav>
 </body>

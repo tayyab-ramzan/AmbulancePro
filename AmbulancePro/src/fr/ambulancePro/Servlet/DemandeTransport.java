@@ -45,7 +45,7 @@ public class DemandeTransport {
 	//HashMap pour les erreurs
 	Map<String, Object> errors = new HashMap<String, Object>();
 
-	@RequestMapping("demandeTransport")
+	@RequestMapping("creer_demande")
 	public ModelAndView saisirDemandeTransport(){
 		errors.clear();
 		data.clear();
@@ -56,7 +56,7 @@ public class DemandeTransport {
 		_etablissements = this.daoEtablissement.recupererEnsemble();
 		data.put("etablissements", _etablissements.getEtablissements());
 		dataErrorMap.put("data",data);
-		return new ModelAndView("demandeTransport", "dataErrors", dataErrorMap);
+		return new ModelAndView("demande_transport/creer_demande", "dataErrors", dataErrorMap);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "demandeTransport")
@@ -136,7 +136,7 @@ public class DemandeTransport {
 		}		
 	}
 	
-	@RequestMapping("liste_demande_transport")
+	@RequestMapping("demande_transport")
 	public ModelAndView listeDemandeTransport(){
 		errors.clear();
 		data.clear();
@@ -146,7 +146,7 @@ public class DemandeTransport {
 		demandes = this.demandeDao.listeDemandeTransport();
 		data.put("demandes", demandes);
 		dataErrorMap.put("data",data);
-		return new ModelAndView("liste_demande_transport", "dataErrors", dataErrorMap);
+		return new ModelAndView("demande_transport/demande_transport", "dataErrors", dataErrorMap);
 	}
 	
 	@RequestMapping("traiter_demande")

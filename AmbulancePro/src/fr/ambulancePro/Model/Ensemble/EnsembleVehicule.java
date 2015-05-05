@@ -44,7 +44,7 @@ public class EnsembleVehicule {
 		this._vehicules = this._dao.recupererEnsemble().getVehicules();
 	}
 	
-	public void creerPersonnel(Vehicule v){
+	public void creerVehicule(Vehicule v){
 		this._vehicules.add(v);
 		this._dao.creer(v);
 	}

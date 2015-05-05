@@ -40,8 +40,8 @@
 				
 					<section class="cols" align="center">
 							<div align='center'><br>
-								<h3 style="font-size: 30px">GESTION DU PERSONNEL</h3><br>
-								<img width="200" height="200" src="css/images/icone personnel.png" alt="" />
+								<h3 style="font-size: 30px">GESTION DU MATÉRIEL</h3><br>
+								<img width="200" height="200" src="css/images/iconemateriel.png" alt="" />
 								<section class="cols"  >
 									<c:import url="../materiel/sous-menu.jsp"></c:import>
 									 <!-- <div class="col">

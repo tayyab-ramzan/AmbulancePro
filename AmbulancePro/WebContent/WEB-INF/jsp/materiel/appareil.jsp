@@ -8,27 +8,30 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="contenu">
+<div class="contenu">
 	<div class="sous-contenu">
-										<div class="ajout"> 
-									 		<a href="ajouter_appareil.html"><h2>Ajouter Appareil</h2></a>  
-									 	</div>
-									<table>
-										<tr>
-											<th>ID</th>
-											<th>Nommination</th>
-											<th>Quantité Disponible</th>
-											<th>Cout Supplémentaire</th>
-										</tr>
-										<c:forEach var="vehicule" items="${data.vehicules}">
-											<a href="#">
-												<tr>
-													<td>${vehicule.getNumeroImatriculation()}</td>
-												</tr>
-											</a>
-										</c:forEach>
-									</table>
-								</div>
-							</div>
+		<div class="ajout"> 
+			<a href="ajouter_appareil.html"><h2>Ajouter Appareil</h2></a>  
+		</div>
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Nommination</th>
+				<th>Quantité Total</th>
+				<th>Quantité Disponible</th>
+				<th>Cout Supplémentaire</th>
+			</tr>
+			<c:forEach var="appareil" items="${data.appareils}">
+				<tr>
+					<td>${appareil.get_idAppareil()}</td>
+					<td>${appareil.getNomAppareil()}</td>
+					<td>${appareil.get_qtyTotal()}</td>
+					<td>${appareil.get_qtyDispo()}</td>
+					<td>${appareil.get_coutSupp()} &euro;</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+</div>
 </body>
 </html>

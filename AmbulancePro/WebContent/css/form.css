@@ -1,6 +1,7 @@
 @CHARSET "ISO-8859-1";
  .form1 {
- 	padding-top: -100px;
+ 	position:relative;
+ 	top:20px;
  	width: 650px;
 }
 
@@ -34,4 +35,6 @@
 	display:inline-block;
 	width:100px;
 	margin-bottom:20px;
+	position:relative;
+	left:-90px;
 }

@@ -63,15 +63,12 @@
 			  					</section>
 							</div>
 							<div class="contenu">
-								<form class= "form1" action="ajouter_personnel.html" method="POST">
-									<input type="hidden" id="role" name="role" value=${ data.ROLE }>
-									<label>Rôle:</label><input type="text" disabled value=${ data.ROLE }>
+								<form class= "form1" action="ajouter_appareil.html" method="POST">
+									<label>Nom:</label><input type="text" id="nom" name="nom" value="${data.nom }" placeholder="Veuillez saisir le nom de l'appareil">${data.errors.nom}
 									<br>
-									<label>Nom:</label><input type="text" id="nom" name="nom" value="${data.nom }" placeholder="Veuillez saisir le nom">${data.errors.nom}
+									<label>Quantité Total:</label><input type="text" id="qty_total" name="qty_total" value="${ data.qty_total }" placeholder="Veuillez saisir la quantité total">${data.errors.qty_total}
 									<br>
-									<label>Prénom:</label><input type="text" id="prenom" name="prenom" value="${ data.prenom }" placeholder="Veuillez saisir le prénom">${data.errors.prenom}
-									<br>
-									<label>E-mail:</label><input type="text" id="email" name="email" value="${ data.email }" placeholder="Veuillez saisir l'adresse e-mail">${data.errors.email}
+									<label>Côut Supplémentaire:</label><input type="text" id="cout_supp" name="cout_supp" value="${ data.cout_supp }" placeholder="Veuillez saisir le côut supplémentaire">${data.errors.cout_supp}
 									<br>
 									<button type="submit" name="submit">AJOUTER </button>
 								</form>

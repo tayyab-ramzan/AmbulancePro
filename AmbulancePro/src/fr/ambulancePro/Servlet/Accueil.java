@@ -18,22 +18,24 @@ public class Accueil {
 	
 	@RequestMapping("accueil")
 	public ModelAndView redirect(HttpSession session){
-		Personnel personnel = (Personnel)session.getAttribute("USER");
-		switch ( personnel.getStrategie().get_intituleRole() ) {
-		case "OPERATEUR":
-			return new ModelAndView("accueil/accueil_admin");
-		case "PLANNING":
-			return new ModelAndView("accueil/accueil_admin");
-		case "FACTURATION":
-			return new ModelAndView("accueil/accueil_admin");
-		case "CHAUFFEUR":
-			return new ModelAndView("accueil/accueil_admin");
-		case "ADMINISTRATEUR":
-			return new ModelAndView("accueil/accueil_admin");
-		default:
-			break;
+		if (session.getAttribute("USER") != null) {
+			Personnel personnel = (Personnel)session.getAttribute("USER");
+			switch ( personnel.getStrategie().get_intituleRole() ) {
+			case "OPERATEUR":
+				return new ModelAndView("accueil/accueil_operateur");
+			case "PLANNING":
+				return new ModelAndView("accueil/accueil_admin");
+			case "FACTURATION":
+				return new ModelAndView("accueil/accueil_admin");
+			case "CHAUFFEUR":
+				return new ModelAndView("accueil/accueil_admin");
+			case "ADMINISTRATEUR":
+				return new ModelAndView("accueil/accueil_admin");
+			default:
+				break;
+			}
 		}
-		return null;
+		return new ModelAndView("redirect:index.html");
 	}
 
 }
