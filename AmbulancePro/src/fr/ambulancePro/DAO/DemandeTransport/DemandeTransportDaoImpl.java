@@ -10,28 +10,39 @@ import java.util.ArrayList;
 
 import fr.ambulancePro.DAO.DAOException;
 import fr.ambulancePro.DAO.DAOFactory;
+import fr.ambulancePro.DAO.Adresse.AdresseDao;
+import fr.ambulancePro.DAO.Etablissement.EtablissementDao;
 import fr.ambulancePro.DAO.Etablissement.EtablissementDaoImpl;
+import fr.ambulancePro.DAO.Malade.MaladeDao;
+import fr.ambulancePro.Model.Adresse;
 import fr.ambulancePro.Model.DemandeTransport;
 import fr.ambulancePro.Model.EtablissementSante;
 import fr.ambulancePro.Model.Malade;
+import fr.ambulancePro.Model.Ensemble.EnsembleDemandeTransport;
 
 public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	
 	private DAOFactory daoFactory;
 	
+	private EtablissementDao _daoEtablissement;
+	private AdresseDao _daoAdresse;
+	private MaladeDao _daoMalade;
+	
 	public static final String SQL_SELECT_PAR_ID = "SELECT * FROM demande_transport WHERE id_demande_transport = ?";
 	public static final String SQL_SELECT_ALL = "SELECT * FROM demande_transport";
 	public static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as nbDemandeTransport  FROM demande_transport";
 	public static final String SQL_INSERT = "INSERT INTO demande_transport (id_demande_transport, date_demande_transport, heure_demande_transport, adresse_debut, adresse_fin,id_etablissement,id_malade) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	public static final String SQL_INSERT_MALADE = "INSERT INTO malade (nom_malade, prenom_malade, adresse_malade) VALUES(?, ?, ?)";
 	
 	public DemandeTransportDaoImpl(DAOFactory daoFactory) {
 		// TODO Auto-generated constructor stub
 		this.daoFactory = daoFactory;
+		this._daoAdresse = this.daoFactory.getAdresseDAO();
+		this._daoEtablissement = this.daoFactory.getEtablissementDao();
+		this._daoMalade = this.daoFactory.getMaladeDAO();
 	}
 	
 	@Override
-	public void creer(DemandeTransport demandeTransport, Malade malade) throws DAOException {
+	public void creer(DemandeTransport demandeTransport) throws DAOException {
 		// TODO Auto-generated method stub
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
@@ -41,32 +52,24 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	        /* Récupération d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
 	        
-	        // Requetr pour la création d'un malade
-	        preparedStatement = initialisationRequetePrepared( connexion, SQL_INSERT_MALADE, true, malade.getNomMalade(), malade.getPrenomMalade(), malade.getAdresseMalade());
-	        int statut = preparedStatement.executeUpdate();
-	        /* Analyse du statut retourné par la requête d'insertion */
-	        if ( statut == 0 ) {
-	            throw new DAOException( "Echec de la cr�tion du malade, aucune ligne ajout�e dans la table." );
-	        }
-	        /* Récupération de l'id auto-généré par la requête d'insertion */
-	        valeursAutoGenerees = preparedStatement.getGeneratedKeys();
-	        if ( valeursAutoGenerees.next() ) {
-	            /* Puis initialisation de la propriété id du bean Utilisateur avec sa valeur */
-	            malade.setIdMalade( valeursAutoGenerees.getInt( 1 ) );
-	        } else {
-	            throw new DAOException( "Échec de la création du malade en base, aucun ID auto-généré retourné." );
-	        }
+	        //Malade
+	        this._daoAdresse.creer(demandeTransport.getMalade().getAdresseMalade());
+	        this._daoMalade.creer(demandeTransport.getMalade());
+	        
+	        //Adresses
+	        this._daoAdresse.creer(demandeTransport.getAdresseDebut());
+	        this._daoAdresse.creer(demandeTransport.getAdresseFin());
+	        
+	        int statut;
 	        
 	        //Requete pour la création d'une demande de transport
 	        String idDemandeTransport = "DT" + String.format("%04d", this.count()+1);
-	        preparedStatement = initialisationRequetePrepared(connexion, SQL_INSERT, false,idDemandeTransport, demandeTransport.getDateTransport(), demandeTransport.getHeureTransport(), demandeTransport.getAdresseDebut(), demandeTransport.getAdresseFin(),demandeTransport.getEtablissement().getIdEtablissement(),malade.getIdMalade());;
+	        preparedStatement = initialisationRequetePrepared(connexion, SQL_INSERT, false,idDemandeTransport, demandeTransport.getDateTransport(), demandeTransport.getHeureTransport(), demandeTransport.getAdresseDebut().getIdAdresse(), demandeTransport.getAdresseFin().getIdAdresse(),demandeTransport.getEtablissement().getIdEtablissement(),demandeTransport.getMalade().getIdMalade());
 	        statut = preparedStatement.executeUpdate();
 	        if ( statut == 0 ) {
 	            throw new DAOException( "Échec de la création d'une demande de transport, aucune ligne ajoutée dans la table." );
 	        }
-	       
 	        demandeTransport.setIdDemandeTransport( idDemandeTransport );
-	        
 	        
 	    } catch ( SQLException e ) {
 	        throw new DAOException( e );
@@ -84,7 +87,6 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	    ResultSet resultSet = null;
 	    ResultSet resultSet2 = null;
 	    DemandeTransport demandeTransport = null;
-	    EtablissementSante etablissement = null;
 	    try {
 	        /* Récupération d'une connexion depuis la Factory */
 	        connexion = this.daoFactory.getConnection();
@@ -93,11 +95,15 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
 	        if ( resultSet.next() ) {
 	        	demandeTransport = map( resultSet );
-	        	preparedStatement = initialisationRequetePrepared(connexion, EtablissementDaoImpl.SQL_SELECT_PAR_ID, false, resultSet.getString("id_etablissement"));
-	        	resultSet2 = preparedStatement.executeQuery();
-	        	if (resultSet2.next()) {
-					demandeTransport.setEtablissement(new EtablissementSante(resultSet2.getString("id_etablissement"), resultSet2.getString("nom_etablissement"), resultSet2.getString("adresse_etablissement"), resultSet2.getString("mail_etablissement"), resultSet2.getString("tel_etablissement")));
-				}
+	        	EtablissementSante etablissement = this._daoEtablissement.trouver(resultSet.getString("id_etablissement") );
+	        	Malade malade = this._daoMalade.trouver(resultSet.getString("id_malade") );
+	        	Adresse adresseDeb = this._daoAdresse.trouver(resultSet.getString("adresse_debut"));
+	        	Adresse adresseFin = this._daoAdresse.trouver(resultSet.getString("adresse_fin"));
+	        	
+	        	demandeTransport.setAdresseDebut(adresseDeb);
+	        	demandeTransport.setAdresseFin(adresseFin);
+	        	demandeTransport.setEtablissement(etablissement);
+	        	demandeTransport.setMalade(malade);
 	        }
 	    } catch ( SQLException e ) {
 	        throw new DAOException( e );
@@ -117,19 +123,17 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 		demande.setIdDemandeTransport( resultSet.getString( "id_demande_transport" ) );
 		demande.setDateTransport( resultSet.getDate( "date_demande_transport" ) );
 		demande.setHeureTransport( resultSet.getTime( "heure_demande_transport" ) );
-		demande.setAdresseDebut( resultSet.getString( "adresse_debut" ) );
-		demande.setAdresseFin( resultSet.getString( "adresse_fin" ) );
 		return demande;
 	}
 	
 	@Override
-	public ArrayList<DemandeTransport> listeDemandeTransport()
+	public EnsembleDemandeTransport listeDemandeTransport()
 			throws DAOException {
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    ResultSet resultSet = null;
 	    ResultSet resultSet2 = null;
-	    ArrayList<DemandeTransport> demandes = new ArrayList<DemandeTransport>();
+	    EnsembleDemandeTransport demandes = new EnsembleDemandeTransport();
 	    
 	    try {
 	        /* R�cup�ration d'une connexion depuis la Factory */
@@ -139,19 +143,23 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
 	        while (resultSet.next()) {
 	        	DemandeTransport demande = map( resultSet );
-	        	preparedStatement = initialisationRequetePrepared(connexion, EtablissementDaoImpl.SQL_SELECT_PAR_ID, false, resultSet.getString("id_etablissement"));
-	        	resultSet2 = preparedStatement.executeQuery();
-	        	if (resultSet2.next()) {
-					demande.setEtablissement(new EtablissementSante(resultSet2.getString("id_etablissement"), resultSet2.getString("nom_etablissement"), resultSet2.getString("adresse_etablissement"), resultSet2.getString("mail_etablissement"), resultSet2.getString("tel_etablissement")));
-				}
-	        	demandes.add(demande);
+	        	EtablissementSante etablissement = this._daoEtablissement.trouver(resultSet.getString("id_etablissement") );
+	        	Malade malade = this._daoMalade.trouver(resultSet.getString("id_malade") );
+	        	Adresse adresseDeb = this._daoAdresse.trouver(resultSet.getString("adresse_debut"));
+	        	Adresse adresseFin = this._daoAdresse.trouver(resultSet.getString("adresse_fin"));
+	        	
+	        	demande.setAdresseDebut(adresseDeb);
+	        	demande.setAdresseFin(adresseFin);
+	        	demande.setEtablissement(etablissement);
+	        	demande.setMalade(malade);
+	        	
+	        	demandes.addDemandeTransport(demande);
 			}
 	    } catch ( SQLException e ) {
 	        throw new DAOException( e );
 	    } finally {
 	        fermeturesSilencieuses( resultSet, preparedStatement, connexion );
 	    }
-	    //System.out.println(demandes.get(0).getIdDemandeTransport());
 	    return demandes;
 	}
 

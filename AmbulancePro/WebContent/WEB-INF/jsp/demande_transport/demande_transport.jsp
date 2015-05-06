@@ -71,9 +71,9 @@
 										<th>ID Demande Transport</th>
 										<th>Nom Etablissement</th>
 										<th>Date et Heure</th>
-											<c:forEach var="demande" items="${dataErrors.data.demandes}">
+											<c:forEach var="demande" items="${data.demandes}">
 												<a href="#">
-													<tr onclick="document.location = 'traiter_demande.html?id=${demande.getIdDemandeTransport()}';">
+													<tr>
 														<td>${demande.getIdDemandeTransport() }</td>
 														<td>${demande.getEtablissement().getNomEtablissement() }</td>
 														<td>Le ${demande.getDateTransport()} à ${demande.getHeureTransport() }

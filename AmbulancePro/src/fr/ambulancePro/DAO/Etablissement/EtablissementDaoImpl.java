@@ -9,19 +9,24 @@ import java.util.ArrayList;
 import static fr.ambulancePro.DAO.DAOUtilitaire.*;
 import fr.ambulancePro.DAO.DAOException;
 import fr.ambulancePro.DAO.DAOFactory;
+import fr.ambulancePro.DAO.Adresse.AdresseDao;
+import fr.ambulancePro.DAO.Adresse.AdresseDaoImpl;
 import fr.ambulancePro.Model.EtablissementSante;
 import fr.ambulancePro.Model.Ensemble.EnsembleEtablissement;
 
 public class EtablissementDaoImpl implements EtablissementDao {
 	private DAOFactory daoFactory;
 	
-	public static final String SQL_SELECT_PAR_ID = "SELECT * FROM etablissement WHERE id_etablissement = ?";
+	public static final String SQL_SELECT_PAR_ID = "SELECT * FROM etablissement , adresse WHERE id_etablissement = ? AND adresse_etablissement = id_adresse";
 	public static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as nbEtablissement FROM etablissement";
-	public static final String SQL_SELECT_ALL = "SELECT * FROM etablissement";
+	public static final String SQL_SELECT_ALL = "SELECT * FROM etablissement E, adresse A WHERE E.adresse_etablissement = A.id_adresse";
 	public static final String SQL_INSERT = "INSERT INTO etablissement (id_etablissement, nom_etablissement, adresse_etablissement, mail_etablissement, tel_etablissement) VALUES (?, ?, ?, ?, ?)";
+	
+	private AdresseDao _daoAdresse;
 	
 	public EtablissementDaoImpl(DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
+		this._daoAdresse = daoFactory.getAdresseDAO();
 	}
 	
 	@Override
@@ -32,14 +37,17 @@ public class EtablissementDaoImpl implements EtablissementDao {
 	    ResultSet valeursAutoGenerees = null;
 
 	    try {
+	    	
+	    	//Sauvegarde de l'adresse dans la base de données
+	    	this._daoAdresse.creer(etablissement.getAdresseEtablissement());
 	        /* R�cup�ration d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
 	        String idEtablissement = "ES" + String.format("%04d", this.count()+1);
-	        preparedStatement = initialisationRequetePrepared( connexion, SQL_INSERT, false,idEtablissement, etablissement.getNomEtablissement(), etablissement.getAdresseEtablissment(), etablissement.getMailEtablissment(), etablissement.getTelEtablissment() );
+	        preparedStatement = initialisationRequetePrepared( connexion, SQL_INSERT, false,idEtablissement, etablissement.getNomEtablissement(), etablissement.getAdresseEtablissement().getIdAdresse(), etablissement.getMailEtablissment(), etablissement.getTelEtablissment() );
 	        int statut = preparedStatement.executeUpdate();
 	        /* Analyse du statut retourné par la requête d'insertion */
 	        if ( statut == 0 ) {
-	            throw new DAOException( "Echec de la cr�ation de l'Etablissement, aucune ligne ajout�e dans la table." );
+	            throw new DAOException( "Echec de la creation de l'Etablissement, aucune ligne ajout�e dans la table." );
 	        }
 	        etablissement.setIdEtablissement( idEtablissement );
 	        
@@ -51,7 +59,7 @@ public class EtablissementDaoImpl implements EtablissementDao {
 	}
 
 	@Override
-	public EtablissementSante trouver(int id) throws DAOException {
+	public EtablissementSante trouver(String id) throws DAOException {
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    ResultSet resultSet = null;
@@ -83,9 +91,9 @@ public class EtablissementDaoImpl implements EtablissementDao {
 		EtablissementSante etablissement = new EtablissementSante();
 		etablissement.setIdEtablissement( resultSet.getString( "id_etablissement" ) );
 		etablissement.setNomEtablissment( resultSet.getString( "nom_etablissement" ) );
-		etablissement.setAdresseEtablissment( resultSet.getString( "adresse_etablissement" ) );
 		etablissement.setTelEtablissment( resultSet.getString( "tel_etablissement" ) );
 		etablissement.setMailEtablissment( resultSet.getString( "mail_etablissement" ) );
+		etablissement.setAdresseEtablissment( AdresseDaoImpl.map(resultSet) );
 	    return etablissement;
 	}
 

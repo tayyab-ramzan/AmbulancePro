@@ -2,12 +2,16 @@ package fr.ambulancePro.Model;
 
 public class Malade {
 	
-	private int _idMalade;
+	private String _idMalade;
 	private String _nomMalade;
 	private String _prenomMalade;
-	private String _adresseMalade;
+	private Adresse _adresseMalade;
 	
-	public Malade(String nomMalade, String prenomMalade, String adresseMalade) {
+	public Malade() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Malade(String nomMalade, String prenomMalade, Adresse adresseMalade) {
 		_nomMalade = nomMalade;
 		_prenomMalade = prenomMalade;
 		_adresseMalade = adresseMalade;
@@ -21,11 +25,11 @@ public class Malade {
 		_nomMalade = nomMalade;
 	}
 
-	public int getIdMalade() {
+	public String getIdMalade() {
 		return _idMalade;
 	}
 
-	public void setIdMalade(int idMalade) {
+	public void setIdMalade(String idMalade) {
 		this._idMalade = idMalade;
 	}
 
@@ -37,11 +41,11 @@ public class Malade {
 		_prenomMalade = prenomMalade;
 	}
 
-	public String getAdresseMalade() {
+	public Adresse getAdresseMalade() {
 		return _adresseMalade;
 	}
 
-	public void setAdresseMalade(String adresseMalade) {
+	public void setAdresseMalade(Adresse adresseMalade) {
 		_adresseMalade = adresseMalade;
 	}
 }

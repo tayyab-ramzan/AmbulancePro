@@ -8,7 +8,7 @@ import fr.ambulancePro.Model.Ensemble.EnsembleEtablissement;
 
 public interface EtablissementDao {
 	public void creer(EtablissementSante etablissement) throws DAOException;
-	public EtablissementSante trouver(int id) throws DAOException;
+	public EtablissementSante trouver(String id) throws DAOException;
 	public int count() throws DAOException;
 	public EnsembleEtablissement recupererEnsemble() throws DAOException;
 }

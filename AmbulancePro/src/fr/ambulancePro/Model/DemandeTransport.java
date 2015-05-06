@@ -8,8 +8,8 @@ public class DemandeTransport {
 	private String _idDemandeTransport;
 	private Date  _dateTransport;
     private Time _heureTransport;
-	private String _adresseDebut;
-	private String  _adresseFin;
+	private Adresse _adresseDebut;
+	private Adresse  _adresseFin;
 	private Malade _malade;
 	private EtablissementSante _etablissement;
 	private enum EtatDemandeTranposrt{ENCOUR, TRAITER, TRANSFERER};
@@ -21,8 +21,8 @@ public class DemandeTransport {
 	
 	public DemandeTransport(Date dateTransport, 
 							Time heureTransport,
-							String adresseDebut, 
-							String adresseFin,
+							Adresse adresseDebut, 
+							Adresse adresseFin,
 							Malade malade,
 							EtablissementSante etablissment) {
 		
@@ -73,19 +73,19 @@ public class DemandeTransport {
 		this._heureTransport = heureTransport;
 	}
 	
-	public String getAdresseDebut() {
+	public Adresse getAdresseDebut() {
 		return this._adresseDebut;
 	}
 	
-	public void setAdresseDebut(String adresseDebut) {
+	public void setAdresseDebut(Adresse adresseDebut) {
 		this._adresseFin = adresseDebut;
 	}
 	
-	public String getAdresseFin() {
+	public Adresse getAdresseFin() {
 		return this._adresseFin;
 	}
 	
-	public void setAdresseFin(String adresseFin) {
+	public void setAdresseFin(Adresse adresseFin) {
 		this._adresseFin = adresseFin;
 	}
 	

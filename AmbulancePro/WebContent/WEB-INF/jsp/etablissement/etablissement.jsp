@@ -65,18 +65,20 @@
 							<div class="contenu">
 									<div class="sous-contenu">
 										<div class="ajout"> 
-									 		<a href="creer_demande.html"><h2>Nouvelle Etablissement</h2></a>  
+									 		<a href="creer_etablissement.html"><h2>Nouvelle Etablissement</h2></a>  
 									 	</div>
 									<table>
 										<th>ID Etablissement</th>
 										<th>Nom Etablissement</th>
+										<th>Adresse</th>
 										<th>Email</th>
-											<c:forEach var="demande" items="${dataErrors.data.demandes}">
+											<c:forEach var="etablissement" items="${data.etablissements}">
 												<a href="#">
-													<tr onclick="document.location = 'traiter_demande.html?id=${demande.getIdDemandeTransport()}';">
-														<td>${demande.getIdDemandeTransport() }</td>
-														<td>${demande.getEtablissement().getNomEtablissement() }</td>
-														<td>Le ${demande.getDateTransport()} à ${demande.getHeureTransport() }
+													<tr>
+														<td>${etablissement.getIdEtablissement() }</td>
+														<td>${etablissement.getNomEtablissement() }</td>
+														<td>${etablissement.getAdresseEtablissement().getNum()} ${etablissement.getAdresseEtablissement().getNomRue()} ${etablissement.getAdresseEtablissement().getCodePostal()} ${etablissement.getAdresseEtablissement().getVille()} </td>
+														<td>${etablissement.getMailEtablissment()}</td>
 													</tr>
 												</a>
 											</c:forEach>

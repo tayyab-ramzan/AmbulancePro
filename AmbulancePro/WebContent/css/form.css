@@ -20,7 +20,10 @@
     width:260px; 	
 }
  
- .form1 button {
+.form1 button {
+	position:relative;
+	left:135px;
+	padding:4px;
 	overflow:hidden;
 }
 
@@ -37,4 +40,33 @@
 	margin-bottom:20px;
 	position:relative;
 	left:-90px;
+}
+
+#nom_rue{
+	position:relative;
+	left:-85px;
+	width: 230px;
+	display: inline-block;
+}
+
+#num{
+	position:relative;
+	left:-83px;
+	margin-bottom:10px;
+	display:inline-block;
+	width: 20px;
+}
+
+#code_postal{
+	position:relative;
+	left:21px;
+	display:inline-block;
+	width: 125px;
+}
+
+#ville{
+	position:relative;
+	left:19px;
+	display: inline-block;
+	width: 124px;
 }

@@ -1,27 +1,95 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Ambulance Pro</title>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="css/etablissement.css"/>
-<title>Insert title here</title>
+<link rel="shortcut icon" type="image/x-icon" href="css/images/favicon.ico" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/form.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="all" />
+	
+	<script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>
+	
+	<script src="js/jquery.flexslider-min.js" type="text/javascript"></script>
+	<script src="js/functions.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 </head>
 <body>
-	<div align='center'>
-		<h3>Formulaire CrÃ©ation Ã‰tablissement</h3><br><br>
-		
-	<form class= "form1" action="etablissement.html" method="POST">
-		<label>Nom Ã‰tablissement:</label><input type="text" id="nom_etablissement" name="nom_etablissement" value="${dataErrors.data.nom}" placeholder="indiquer le nom de l'Ã©tablissement">${dataErrors.errors.nom}  <br>
-		<label>Adresse:</label><input id="adresse" name="adresse" value="${dataErrors.data.adresse}" placeholder="indiquer l'adresse de l'Ã©tablissement">${dataErrors.errors.adresse} <br>
-		
-		<label>Email:</label><input id="email" name="email" value="${dataErrors.data.email}" placeholder="indiquer l'Email de l'Ã©tablissement">${dataErrors.errors.email} <br>
-		<label>TÃ©lÃ©phone:</label> <input id="tel" name="tel" value="${dataErrors.data.tel}" placeholder="indiquer le numÃ©ro de Tel de l'Ã©tablissement">${dataErrors.errors.tel} <br>
-		<button type="submit" name="submit">CrÃ©er</button>
-	</form>
+
+<!-- wraper -->
+	<div id="wrapper">
+		<!-- shell -->
+		<div class="shell">
+			<!-- container -->
+			<div class="container">
+				<c:import url="../header.jsp"></c:import>
+				<c:import url="../user_information.jsp"></c:import>
+				<!-- main -->
+				<div class="main">
+					<nav id ="navigation"> 
+						<ul>
+							<li class="active"><a href="demande_transport.html">Demande de Transport</a></li>
+							<li class="active"><a style="color: #8A0808">Établissement</a></li>
+						</ul>
+					</nav>
+				
+					<section class="cols" align="center">
+							<div align='center'><br>
+								<h3 style="font-size: 30px">ETABLISSEMENTS</h3><br>
+								<img width="200" height="200" src="css/images/icone hopital.png" alt="" />
+								<section class="cols"  >
+									<c:import url="../personnel/sous-menu.jsp"></c:import>
+									 <!-- <div class="col">
+									 <div class="col-cnt"> 
+									  
+									 <a href="ajouter_personnel.html" class="more">Entrer</a> 
+									 </div> </div> 
+									 <div class="col"> <div class="col-cnt">
+									  <h2>Supprimer Personnel</h2>
+									 <a href="SupprimerMateriel.jsp" class="more">Entrer</a> 
+									 </div> </div> 
+									 <div class="col"> <div class="col-cnt"> 
+									 <h2>Modifier Personnel</h2> 
+									 <a href="ModifierMateriel.jsp" class="more"> Entrer </a> 
+									 </div> </div>
+									  <div class="cl">&nbsp;</div>  -->
+								
+			  					</section>
+							</div>
+							
+							<div class="contenu">
+									<div class="sous-contenu">
+										<div class="ajout"> 
+									 		<a href="creer_etablissement.html"><h2>Nouvelle Etablissement</h2></a>  
+									 	</div>
+										<form class= "form1" action="creer_etablissement.html" method="POST">
+											<label>Nom Établissement:</label><input type="text" id="nom_etablissement" name="nom_etablissement" value="${data.nom}" placeholder="Nom de l'établissement">${data.errors.nom}  <br>
+											<label>Adresse:</label> 
+												<input type="text" id="num" name="num" value="${data.num}" placeholder="n°"> 
+												<input type="text" id="nom_rue" name="nom_rue" value="${data.adresse}" placeholder="Rue/Avenue"> <br>
+												<input type="number" id="code_postal" name="code_postal" value="${data.code_postal}" placeholder="Code Postal"> <input id="ville" name="ville" value="${data.ville}" placeholder="Ville"><br>${data.errors.adresse}<br>
+												
+											<label>Email:</label><input type="email" id="email" name="email" value="${data.email}" placeholder="Email de l'établissement">${data.errors.email} <br>
+											<label>Téléphone:</label> <input type="tel" id="tel" name="tel" value="${data.tel}" placeholder="Téléphone de l'établissement">${data.errors.tel} <br>
+											<button type="submit" name="submit">Créer</button>
+										</form>
+								</div>
+							</div>
+					</section>			
+				</div>
+				<!-- end of main -->
+			</div>
+			<!-- end of container -->	
+		</div>
+		<!-- end of shell -->	
 	</div>
-	
+	<!-- end of wrapper -->
+
 </body>
 </html>

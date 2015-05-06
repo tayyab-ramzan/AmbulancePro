@@ -4,7 +4,7 @@ public class EtablissementSante implements Comparable<EtablissementSante>{
 	
 	private String _idEtablissement;	
 	private String _nomEtablissement;
-	private String _adresseEtablissment;
+	private Adresse _adresseEtablissment;
 	private String _mailEtablissment;
 	private String _telEtablissment;	
 	
@@ -12,14 +12,14 @@ public class EtablissementSante implements Comparable<EtablissementSante>{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public EtablissementSante(String nomEtablissment,String adresseEtablissment, String mailEtablissment,String telEtablissment) {
+	public EtablissementSante(String nomEtablissment,Adresse adresseEtablissment, String mailEtablissment,String telEtablissment) {
 		_nomEtablissement = nomEtablissment;
 		_adresseEtablissment = adresseEtablissment;
 		_mailEtablissment = mailEtablissment;
 		_telEtablissment = telEtablissment;
 	}
 	
-	public EtablissementSante(String idEtablissement, String nomEtablissment,String adresseEtablissment, String mailEtablissment,String telEtablissment) {
+	public EtablissementSante(String idEtablissement, String nomEtablissment,Adresse adresseEtablissment, String mailEtablissment,String telEtablissment) {
 		this._idEtablissement = idEtablissement;
 		this._nomEtablissement = nomEtablissment;
 		this._adresseEtablissment = adresseEtablissment;
@@ -41,10 +41,10 @@ public class EtablissementSante implements Comparable<EtablissementSante>{
 	public void setNomEtablissment(String nomEtablissment) {
 		_nomEtablissement = nomEtablissment;
 	}
-	public String getAdresseEtablissment() {
+	public Adresse getAdresseEtablissement() {
 		return _adresseEtablissment;
 	}
-	public void setAdresseEtablissment(String adresseEtablissment) {
+	public void setAdresseEtablissment(Adresse adresseEtablissment) {
 		_adresseEtablissment = adresseEtablissment;
 	}
 	public String getMailEtablissment() {
