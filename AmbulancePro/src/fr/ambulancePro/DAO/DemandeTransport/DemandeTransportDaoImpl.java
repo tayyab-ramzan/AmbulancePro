@@ -99,7 +99,7 @@ public class DemandeTransportDaoImpl implements DemandeTransportDao {
 	        	Malade malade = this._daoMalade.trouver(resultSet.getString("id_malade") );
 	        	Adresse adresseDeb = this._daoAdresse.trouver(resultSet.getString("adresse_debut"));
 	        	Adresse adresseFin = this._daoAdresse.trouver(resultSet.getString("adresse_fin"));
-	        	
+	        	System.out.println(adresseDeb.toString());
 	        	demandeTransport.setAdresseDebut(adresseDeb);
 	        	demandeTransport.setAdresseFin(adresseFin);
 	        	demandeTransport.setEtablissement(etablissement);

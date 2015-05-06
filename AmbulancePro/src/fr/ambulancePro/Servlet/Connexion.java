@@ -56,7 +56,7 @@ public class Connexion {
 		case "OPERATEUR":
 			return new ModelAndView("accueil/accueil_operateur");
 		case "PLANNING":
-			return new ModelAndView("accueil/accueil_admin");
+			return new ModelAndView("accueil/accueil_planning");
 		case "FACTURATION":
 			return new ModelAndView("accueil/accueil_admin");
 		case "CHAUFFEUR":

@@ -45,7 +45,11 @@
 					<nav id ="navigation"> 
 						<ul>
 							<li class="active"><a style="color: #8A0808" >Demande de Transport</a></li>
-							<li class="active"><a  href="etablissement.html">Établissement</a></li>
+							<c:choose>
+								<c:when test="${ USER.getStrategie().get_intituleRole() == 'OPERATEUR' }">
+									<li class="active"><a  href="etablissement.html">Établissement</a></li>
+								</c:when>
+							</c:choose>
 						</ul>
 					</nav>
 					<section class="cols" align="center">

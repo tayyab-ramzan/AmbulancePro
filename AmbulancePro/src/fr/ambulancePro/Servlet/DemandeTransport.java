@@ -25,6 +25,7 @@ import fr.ambulancePro.Model.Adresse;
 import fr.ambulancePro.Model.Malade;
 import fr.ambulancePro.Model.Ensemble.EnsembleDemandeTransport;
 import fr.ambulancePro.Model.Ensemble.EnsembleEtablissement;
+import fr.ambulancePro.Model.Ensemble.EnsemblePersonnel;
 
 @Controller
 public class DemandeTransport{
@@ -165,12 +166,14 @@ public class DemandeTransport{
 	@RequestMapping("traiter_demande")
 	public ModelAndView traiterDemande (@RequestParam("id") String id){
 		
+		fr.ambulancePro.Model.DemandeTransport demande = this._demandes.getDemandeByID(id);
+		data.put("demande", demande);
 		/*this.demandeDao = ( (DAOFactory) context.getAttribute( CONF_DAO_FACTORY ) ).getDemandeTransportDao();
 		fr.ambulancePro.Model.DemandeTransport demande = demandeDao.trouver(id);
 		errors.clear();
 		data.clear();
 		data.put("demande", demande);*/
-		return new ModelAndView("traiter_demande","data",data);
+		return new ModelAndView("demande_transport/traiter_demande","data",data);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "traiterDemande")

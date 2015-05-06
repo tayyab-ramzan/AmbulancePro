@@ -102,7 +102,7 @@ public class MaladeDAOImpl implements MaladeDao {
 		Malade malade = new Malade();
 		malade.setIdMalade( resultSet.getString( "id_malade" ) );
 		malade.setNomMalade( resultSet.getString( "nom_malade" ) );
-		malade.setPrenomMalade( resultSet.getString( "prenom_malde" ) );
+		malade.setPrenomMalade( resultSet.getString( "prenom_malade" ) );
 		malade.setAdresseMalade( AdresseDaoImpl.map(resultSet));
 	    return malade;
 	}

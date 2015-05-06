@@ -50,4 +50,10 @@ public class Adresse {
 	public void setVille(String _ville) {
 		this._ville = _ville;
 	}
+	
+	public String toString(){
+		String adresse = null;
+		adresse = this._num + " " + this._nomRue + " " + this._codePostal + " " + this._ville;
+		return adresse;
+	}
 }

@@ -78,7 +78,7 @@ public class DemandeTransport {
 	}
 	
 	public void setAdresseDebut(Adresse adresseDebut) {
-		this._adresseFin = adresseDebut;
+		this._adresseDebut = adresseDebut;
 	}
 	
 	public Adresse getAdresseFin() {
